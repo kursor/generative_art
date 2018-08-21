@@ -14,7 +14,7 @@ import matplotlib.pyplot as plt
 from mpl_toolkits.mplot3d.axes3d import get_test_data
 
 fig = plt.figure(figsize=(4,4), 
-                 dpi=200, 
+                 dpi=300, 
                  facecolor=None, 
                  edgecolor=None, 
                  linewidth=0.0, 

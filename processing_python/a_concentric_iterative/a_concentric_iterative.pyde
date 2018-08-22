@@ -52,37 +52,49 @@ def setup():
 
 def draw():
     
-    num_circles = 11
+    #num_circles = 11
     
-    num_cols = 6
-    outer_radius = width / num_cols
+    #num_cols = 6
     
-    v_step = outer_radius / 2
-    h_step = outer_radius * 0.99
+    #y_noise = 0.03
+    #x_noise = 0.02
 
-    num_rows = int(height / v_step)+1
-    
-    x = 0
-    y = 0
-    for row in range(0, num_rows):
-        for col in range(0, num_cols):
-            if row % 2 == 0:
-                x = col * h_step + (h_step/2)
-            else:
-                x = col * h_step
-            y = row * v_step + random(0,height*.03)
-            concentric_circles(x, y, num_circles, outer_radius, g.backgroundColor)
-    border()
-    save('concentric_001.png')
-    
-    
+    idx = 0
+    num_circles_list = [1, 3, 7, 11, 15]
+    num_cols_list = [1, 3, 7, 11, 15]
+    noise_list = [x/10.0 for x in range(0,7)]
+    for num_circles in num_circles_list:
+        for num_cols in num_cols_list:
+            for xy_noise in noise_list:
+                    
+                idx += 1
+            
+                outer_radius = width / num_cols
+                
+                y_step = outer_radius / 2
+                x_step = outer_radius * 0.99
+                num_rows = int(height / y_step)+1
+                x = 0
+                y = 0
+                for row in range(0, num_rows):
+                    for col in range(0, num_cols):
+                        if row % 2 == 0:
+                            x = col * x_step + (x_step/2) + random(0,height*xy_noise)
+                        else:
+                            x = col * x_step + random(0,height*xy_noise)
+                        y = row * y_step + random(0,height*xy_noise)
+                        concentric_circles(x, y, num_circles, outer_radius, g.backgroundColor)
+                border()
+                annotate(num_circles, num_cols, xy_noise)
+                saveFrame('output/concentric_{:02}_{:02}_{:01}.png'.format(num_circles, num_cols, int(xy_noise*10)))
+                print('concentric_{:02}_{:02}_{:01}.png'.format(num_circles, num_cols, int(xy_noise*10)))
+
 def concentric_circles(x=100, y=100, num_circles=3, outer_radius=100, color_fill='#ffffff', color_stroke='#000000', weight=1):
         step = outer_radius / num_circles
         radius = outer_radius
         fill(color_fill)
         stroke(color_stroke)
         for i in range(0,num_circles+1):
-            print(i, radius)
             ellipse(x, y, radius, radius)
             radius -= step
         
@@ -93,3 +105,15 @@ def border():
     rect(0, 0, width*pad_pct, height)  # Left
     rect(0, height - height*pad_pct, width, height*pad_pct)  # Bottom
     rect(width - width*pad_pct, 0, width*pad_pct, height)  # Right
+    
+def annotate(num_circles, num_cols, xy_noise):
+    stroke(0)
+    fill(0)
+    textFont(createFont('Courier',100))
+    textAlign(LEFT, TOP)
+    textSize(height*0.013)
+    text('concentric_{:02}_{:02}_{:01}.png\nEmulating @paulrickards'.format(num_circles, num_cols, int(xy_noise*10)), width*pad_pct, height - (height*pad_pct*0.9))
+    textAlign(RIGHT, TOP)
+    text('Aaron Penne', width - width*pad_pct, height - (height*pad_pct*0.9))
+    
+    

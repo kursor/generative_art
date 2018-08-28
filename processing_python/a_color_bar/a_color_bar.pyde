@@ -11,7 +11,6 @@
 # https://github.com/aaronpenne
 ################################################################################
 
-from itertools import cycle, islice
 
 # Define globals here
 rand_seed = 1138

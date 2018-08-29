@@ -3,7 +3,7 @@
 <p align="center"><img src="https://raw.githubusercontent.com/aaronpenne/generative_art/master/processing_python/a_blur_circles/output/fangor_wannabe.png" alt="fangor_wannabe" width="60%"></p>
 
 
-## Random iterationgs in the Fangor style ([source](https://github.com/aaronpenne/generative_art/tree/master/processing_python/a_fangor_iterative))
+## Random iterations in the Fangor style ([source](https://github.com/aaronpenne/generative_art/tree/master/processing_python/a_fangor_iterative))
 
 <p align="center"><img src="https://raw.githubusercontent.com/aaronpenne/generative_art/master/processing_python/a_fangor_iterative/images/screenshot.png" alt="fangor_wannabe" width="80%"></p>
 

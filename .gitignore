@@ -1,3 +1,4 @@
+output/
 data/
 *.wav
 .DS_Store

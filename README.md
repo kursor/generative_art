@@ -5,7 +5,7 @@
 
 ## Random iterations in the Fangor style ([source](https://github.com/aaronpenne/generative_art/tree/master/processing_python/a_fangor_iterative))
 
-<p align="center"><img src="https://github.com/aaronpenne/generative_art/blob/master/processing_python/fangor_iterative/images/screenshot.pngg" alt="fangor_wannabe" width="80%"></p>
+<p align="center"><img src="https://github.com/aaronpenne/generative_art/blob/master/processing_python/fangor_iterative/images/screenshot.png" alt="fangor_wannabe" width="80%"></p>
 
 
 ## Trying to make blurry circles

@@ -69,9 +69,21 @@ def draw():
     print(x_norm)
     
     
+    sins = [abs(sin(v*2*math.pi)**2) for v in x_tmp]   
+    x_start_perturb_max = 5
+    x_end_perturb_max = 5
+    y_start_perturb_max = 3 
+    y_end_start_perturb_max = 15 
+    
     for ix, x_val in enumerate(range(0, width, x_pad)):
-        for iy, y_offset in enumerate(range(0, height, x_pad)):
-            line(x_val, y_offset, x_val+x_pad, y_offset+random(-30, 30)*x_norm[ix])
+        for iy, y_offset in enumerate(range(0, height, height/100)):
+            horizontal_wave = (int(sin(y_offset/float(height)*2*math.pi)*0.25*len(sins)))
+            phase = (horizontal_wave + (ix/2 + iy/3))%len(sins)
+            y_start_randomness = random(-y_start_perturb_max, y_start_perturb_max)*sins[phase]
+            y_end_randomness = random(-y_end_start_perturb_max, y_end_start_perturb_max)*sins[phase]
+            x_start_randomness = random(0, x_start_perturb_max)*sins[phase]+1
+            x_end_randomness = random(-x_end_perturb_max, 0)*sins[phase]-1
+            line(x_val+x_start_randomness, y_offset+y_start_randomness, x_val+x_end_randomness+x_pad, y_offset+y_end_randomness) # x_norm[ix])
             
 
     filename = create_filename('sinful')

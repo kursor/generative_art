@@ -77,7 +77,8 @@ def draw():
     
     for ix, x_val in enumerate(range(0, width, x_pad)):
         for iy, y_offset in enumerate(range(0, height, height/100)):
-            horizontal_wave = (int(sin(y_offset/float(height)*2*math.pi)*0.25*len(sins)))
+            #horizontal_wave = (int(sin(y_offset/float(height)*2*math.pi)*0.25*len(sins)))
+            horizontal_wave = 1
             phase = (horizontal_wave + (ix/2 + iy/3))%len(sins)
             y_start_randomness = random(-y_start_perturb_max, y_start_perturb_max)*sins[phase]
             y_end_randomness = random(-y_end_start_perturb_max, y_end_start_perturb_max)*sins[phase]
@@ -85,10 +86,10 @@ def draw():
             x_end_randomness = random(-x_end_perturb_max, 0)*sins[phase]-1
             line(x_val+x_start_randomness, y_offset+y_start_randomness, x_val+x_end_randomness+x_pad, y_offset+y_end_randomness) # x_norm[ix])
             
-
+    output_filename = os.path.join('output', 'sinful_#######.png')
     filename = create_filename('sinful')
-    saveFrame('output/sinful_{}_#######.png'.format(palette))
-    #print('concentric_{:02}_{:02}_{:01}.png'.format(num_circles, num_cols, int(xy_noise*10)))
+    saveFrame(output_filename)
+    print(output_filename)
 
 def random_list_value(val_list):
     index = int(random(0, len(val_list)))

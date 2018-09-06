@@ -1,3 +1,8 @@
+## Playing with x-scaled randomness ([source](https://github.com/aaronpenne/generative_art/tree/master/processing_python/sinful))
+
+<p align="center"><img src="https://github.com/aaronpenne/generative_art/blob/master/processing_python/sinful/images/sinful_x_rando.png" alt="playing with lines" width="60%"></p>
+
+
 ## My take on [M74 by Wojciech Fangor](https://desa.pl/en/auctions/414/object/41872/wojciech-fangor-m-74-19702001)
 
 <p align="center"><img src="https://github.com/aaronpenne/generative_art/blob/master/processing_python/fangor_m74/images/fangor_wannabe.png" alt="fangor_wannabe" width="60%"></p>

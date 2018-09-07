@@ -48,7 +48,7 @@ def draw():
         print('Using all fonts')
         font_list = PFont.list()
     
-    font_list = ['Bauhaus 93']
+    #font_list = ['Bauhaus 93']
     
     # Get the good fonts from curated dir
     # file_list = [f.replace('center_', '') for f in os.listdir('good_fonts')]
@@ -65,7 +65,7 @@ def draw():
         # hue_val = random_centered(26.7, 5)
         # sat_val = random_centered(3.7, 3)
         # bri_val = random_centered(95.3, 3)
-        background(26.7, 3.7, 95.3)
+        background(26.7, 3.7, 95.3) #f3eeea
         
         # Initialize font
         text_font = createFont(font, text_size)
@@ -78,12 +78,14 @@ def draw():
         textAlign(CENTER, BOTTOM)
         textSize(text_size)
         
+        # Print each string at different locations
         offset = h/6
-        print_string_stack(string.punctuation, 1*offset)
-        print_string_stack(string.ascii_lowercase, 2*offset)
-        print_string_stack(string.printable, 3*offset)
-        print_string_stack(string.ascii_uppercase, 4*offset)
-        print_string_stack(string.digits, 5*offset)
+        offset_pad = 40
+        print_string_stack(string.punctuation, 1*offset+offset_pad)
+        print_string_stack(string.ascii_lowercase, 2*offset+offset_pad)
+        print_string_stack(string.printable, 3*offset+offset_pad)
+        print_string_stack(string.ascii_uppercase, 4*offset+offset_pad)
+        print_string_stack(string.digits, 5*offset+offset_pad)
             
         # Prints the name of the font
         text_font = createFont('Consolas', text_size)
@@ -96,7 +98,7 @@ def draw():
         
         font_name = font.replace('\\', '')
         font_name = font.replace('/', '')
-        output_filename = os.path.join('output', '{}_{}_{}.png'.format(timestamp, text_size, font_name))
+        output_filename = os.path.join('output', '{}_{}.png'.format(timestamp, font_name))
         saveFrame(output_filename)
         print(output_filename)
     

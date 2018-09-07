@@ -11,8 +11,8 @@ import sys
 # Define globals here
 rand_seed = 1138
 frame_rate = 1
-w = 800  # width
-h = 950  # height
+w = 2000  # width
+h = 2500  # height
 count = 0
 timestamp = datetime.datetime.now().strftime('%Y%m%d_%H%M%S')
 
@@ -42,22 +42,22 @@ def draw():
 
     # Read font list
     try:
-        with open('font_list.txt', 'r') as f:
+        with open('font_list_mac.txt', 'r') as f:
             font_list = f.read().splitlines()
     except:
         print('Using all fonts')
         font_list = PFont.list()
     
-    #font_list = ['Bauhaus 93']
+    #font_list = ['Amarillo']
     
-    # Get the good fonts from curated dir
-    # file_list = [f.replace('center_', '') for f in os.listdir('good_fonts')]
-    # file_list = [f.replace('.png', '') for f in file_list]
-    # with open('font_list.txt', 'w+') as f:
-    #     for font in file_list:
+    # filter_list = ['Bold', 'Italic', 'Heavy', 'Black', 'Light']
+    # font_list_text = [x for x in PFont.list() if ~any(f in x for f in filter_list)]
+    # # Get the fonts in a text file
+    # with open('font_list_mac.txt', 'w+') as f:
+    #     for font in font_list_text:
     #         f.write('{}\n'.format(font)) 
     
-    text_size = 130
+    text_size = 300
     
     for font in font_list:
         
@@ -70,9 +70,9 @@ def draw():
         # Initialize font
         text_font = createFont(font, text_size)
         textFont(text_font)
-            
+        
         # Text properties
-        fill(0, 0, 24.7, 4)  #3f3f3f
+        fill(0, 0, 4, 7)  #3f3f3f
         #fill(168, 31.7, 74.1, 4)  #81bdb1
         stroke(0, 0, 0)
         textAlign(CENTER, BOTTOM)
@@ -80,19 +80,25 @@ def draw():
         
         # Print each string at different locations
         offset = h/6
-        offset_pad = 40
+        offset_pad = h*0.045
+        
         print_string_stack(string.punctuation, 1*offset+offset_pad)
+        
         print_string_stack(string.ascii_lowercase, 2*offset+offset_pad)
-        print_string_stack(string.printable, 3*offset+offset_pad)
+        
+        full_string = string.ascii_lowercase + string.ascii_uppercase + string.digits
+        print_string_stack(full_string, 3*offset+offset_pad)
+        
         print_string_stack(string.ascii_uppercase, 4*offset+offset_pad)
+        
         print_string_stack(string.digits, 5*offset+offset_pad)
             
         # Prints the name of the font
-        text_font = createFont('Consolas', text_size)
+        text_font = createFont('LucidaSans-Typewriter', text_size)
         textFont(text_font)
         fill(0, 0, 0, 30)
         textAlign(CENTER, BOTTOM)
-        textSize(25)
+        textSize(35)
         text(font, w/2, 5.6*offset)
         
         

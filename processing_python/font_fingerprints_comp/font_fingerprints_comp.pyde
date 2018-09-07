@@ -11,8 +11,8 @@ import sys
 # Define globals here
 rand_seed = 1138
 frame_rate = 1
-w = 800  # width
-h = 950  # height
+w = 2000  # width
+h = 2500  # height
 count = 0
 timestamp = datetime.datetime.now().strftime('%Y%m%d_%H%M%S')
 
@@ -50,14 +50,14 @@ def draw():
         print('Using all fonts')
         font_list = PFont.list()
     
-    w_offset_list = [200, 400, 600]
+    w_offset_list = [w*0.3, w*0.5, w*0.7]
     font_list = ['Consolas', 'Arial', 'Times New Roman']
     font_list = ['Calibri', 'Century Gothic', 'Arial']
     font_list = ['Times New Roman', 'Garamond', 'Georgia']
     font_list = ['Monospaced.plain', 'Consolas', 'Lucida Console']
     font_list = ['Chiller', 'Amarillo', 'Papyrus']
     font_list = ['Bauhaus 93', 'Amarillo', 'Agency FB']
-    font_list_string = '_'.join(font_list)
+    font_name = '_'.join(font_list)
     
     # Get the good fonts from curated dir
     # file_list = [f.replace('center_', '') for f in os.listdir('good_fonts')]
@@ -66,7 +66,7 @@ def draw():
     #     for font in file_list:
     #         f.write('{}\n'.format(font)) 
     
-    text_size = 130
+    text_size = 300
     
     for w_offset, font in zip(w_offset_list, font_list):        
         # Initialize font
@@ -82,22 +82,30 @@ def draw():
         
         # Print each string at different locations
         offset = h/6
-        offset_pad = 40
-        print_string_stack(string.punctuation, w_offset, 1*offset+offset_pad)
-        print_string_stack(string.ascii_lowercase, w_offset, 2*offset+offset_pad)
-        print_string_stack(string.printable, w_offset, 3*offset+offset_pad)
-        print_string_stack(string.ascii_uppercase, w_offset, 4*offset+offset_pad)
-        print_string_stack(string.digits, w_offset, 5*offset+offset_pad)
+        offset_pad = h * 0.045
+        
+        print_string_stack(string.punctuation, 1*offset+offset_pad)
+        
+        print_string_stack(string.ascii_lowercase, 2*offset+offset_pad)
+        
+        full_string = string.ascii_lowercase + string.ascii_uppercase + string.digits
+        print_string_stack(full_string, 3*offset+offset_pad)
+        
+        print_string_stack(string.ascii_uppercase, 4*offset+offset_pad)
+        
+        print_string_stack(string.digits, 5*offset+offset_pad)
             
         # Prints the name of the font
         text_font = createFont('Consolas', text_size)
         textFont(text_font)
         fill(0, 0, 0, 30)
         textAlign(CENTER, BOTTOM)
-        textSize(15)
+        textSize(35)
         text(font, w_offset, 5.6*offset)
         
-    output_filename = os.path.join('output', '{}_{}.png'.format(timestamp, font_list_string))
+    font_name = font.replace('\\', '')
+    font_name = font.replace('/', '')
+    output_filename = os.path.join('output', '{}_{}.png'.format(timestamp, font_name))
     saveFrame(output_filename)
     print(output_filename)
     

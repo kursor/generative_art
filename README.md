@@ -1,6 +1,6 @@
 ## Font Fingerprints Square with Webdings
 
-<p align="center"><img src="https://github.com/aaronpenne/generative_art/blob/master/processing_python/font_fingerprints_square/curated/webdings_square_space.png" alt="fingerprint_square" width="60%"></p>
+<p align="center"><img src="https://github.com/aaronpenne/generative_art/blob/master/processing_python/font_fingerprints_square/curated/wallpaper_Webdings.png" alt="fingerprint_square" width="100%"></p>
 
 ## Font Fingerprints ([source](https://github.com/aaronpenne/generative_art/tree/master/processing_python/font_fingerprints))
 

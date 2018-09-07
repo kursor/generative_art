@@ -1,3 +1,13 @@
+## Font Fingerprints ([source](https://github.com/aaronpenne/generative_art/tree/master/processing_python/font_fingerprints))
+
+<p align="center"><img src="https://github.com/aaronpenne/generative_art/blob/master/processing_python/font_fingerprints/curated/20180906_225527_OCRAStd.png" alt="ocra_std" width="60%"></p>
+
+<p align="center"><img src="https://github.com/aaronpenne/generative_art/blob/master/processing_python/font_fingerprints/curated/20180906_225527_QuicksandLight-Regular.png" alt="quicksand" width="60%"></p>
+
+## Font Fingerprints comparison of font layouts ([source](https://github.com/aaronpenne/generative_art/tree/master/processing_python/font_fingerprints_comp))
+
+<p align="center"><img src="https://github.com/aaronpenne/generative_art/blob/master/processing_python/font_fingerprints_comp/curated/20180906_232627_Bauhaus%2093_Amarillo_Agency%20FB.png" alt="font_comparison" width="60%"></p>
+
 ## Playing with x-scaled randomness ([source](https://github.com/aaronpenne/generative_art/tree/master/processing_python/sinful))
 
 <p align="center"><img src="https://github.com/aaronpenne/generative_art/blob/master/processing_python/sinful/images/sinful_x_rando.png" alt="playing with lines" width="60%"></p>

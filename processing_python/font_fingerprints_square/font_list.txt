@@ -1,0 +1,115 @@
+Agency FB Bold
+Agency FB
+Algerian
+Amarillo
+Arial Bold
+Arial Italic
+Arial Rounded MT Bold
+Arial
+Baskerville Old Face
+Bauhaus 93
+Bell MT
+Berlin Sans FB
+BirchStd
+Blackadder ITC
+Bodoni MT
+Book Antiqua
+Bookman Old Style
+Bookshelf Symbol 7
+Bradley Hand ITC
+Britannic Bold
+Broadway
+BrushScriptStd
+Calibri Bold
+Calibri Italic
+Calibri
+Castellar
+Century Gothic Bold
+Century Gothic Italic
+Century Gothic
+Chiller
+Colonna MT
+Consolas Bold
+Consolas Italic
+Consolas
+Cooper Black
+Copperplate Gothic Light
+Corbel
+Courier New Bold
+Courier New Italic
+Courier New
+Curlz MT
+Dialog.plain
+Edwardian Script ITC
+Elephant
+Engravers MT
+Eras Light ITC
+Felix Titling
+Forte
+Freestyle Script
+Garamond Bold
+Garamond Italic
+Garamond
+Georgia Bold
+Georgia Italic
+Georgia
+GiddyupStd
+Gigi
+Gill Sans MT
+Goudy Stout
+Haettenschweiler
+Harlow Solid Italic
+Harrington
+HoboStd
+Impact
+Ink Free
+Juice ITC
+Kunstler Script
+Leelawadee UI
+LemonMilk
+LetterGothicStd
+Lucida Bright
+Lucida Calligraphy Italic
+Lucida Console
+Lucida Handwriting Italic
+Magneto Bold
+Matura MT Script Capitals
+MesquiteStd
+Mistral
+Modern No. 20
+Monospaced.bold
+Monospaced.italic
+Monospaced.plain
+Niagara Engraved
+Nirmala UI Bold
+Nirmala UI
+OCR B MT
+OCRAStd
+Old English Text MT
+Onyx
+Palatino Linotype
+Papyrus
+Parchment
+Perpetua
+Playbill
+PoplarStd
+QuicksandBold-Regular
+QuicksandBook-Regular
+QuicksandLight-Regular
+QuickType II Pi
+QuickType II
+Rage Italic
+Ravie
+Rockwell
+SansSerif.plain
+Serif.plain
+Showcard Gothic
+SimSun
+Stencil
+Tahoma
+Times New Roman Bold
+Times New Roman Italic
+Times New Roman
+Verdana
+Vivaldi Italic
+Wide Latin

@@ -4,21 +4,17 @@
 # https://github.com/aaronpenne
 ################################################################################
 
+import datetime
 import string
-import math
 import sys
 
 # Define globals here
 rand_seed = 1138
 frame_rate = 1
-w = 600  # width
-h = 1040  # height
-border_pad = 60
+w = 800  # width
+h = 950  # height
 count = 0
-
-x_pad = 10
-theta = 0
-amplitude = 100
+timestamp = datetime.datetime.now().strftime('%Y%m%d_%H%M%S')
 
 def setup():
     # Sets size of canvas in pixels (must be first line)
@@ -32,19 +28,10 @@ def setup():
         
     # Set the number of frames per second to display
     frameRate(frame_rate)
-    
-    # Set (x, y) to center
-    imageMode(CENTER)
-    ellipseMode(CENTER)
-    #textMode(CENTER)
-    rectMode(CENTER)
-    
-    background(0, 0, 97)
-    
+        
     # Stops draw() from running in an infinite loop (should be last line)
     randomSeed(rand_seed)
     noLoop()
-
 
 
 def draw():
@@ -53,224 +40,85 @@ def draw():
         sys.exit(0)
     count += 1
 
+    # Read font list
+    try:
+        with open('font_list.txt', 'r') as f:
+            font_list = f.read().splitlines()
+    except:
+        print('Using all fonts')
+        font_list = PFont.list()
     
-    palette_name, palette = select_palette(idx=0)
-    print(palette_name)
-    # c = palette[3]
-    # print(c)
+    font_list = ['Bauhaus 93']
     
-
-    text_size = 200
-    text_area = text_size * 1.2
-
-    center = w/2
-    for font in PFont.list():
+    # Get the good fonts from curated dir
+    # file_list = [f.replace('center_', '') for f in os.listdir('good_fonts')]
+    # file_list = [f.replace('.png', '') for f in file_list]
+    # with open('font_list.txt', 'w+') as f:
+    #     for font in file_list:
+    #         f.write('{}\n'.format(font)) 
+    
+    text_size = 130
+    
+    for font in font_list:
         
-        background(0, 0, 97)
+        # Background color
+        # hue_val = random_centered(26.7, 5)
+        # sat_val = random_centered(3.7, 3)
+        # bri_val = random_centered(95.3, 3)
+        background(26.7, 3.7, 95.3)
         
+        # Initialize font
         text_font = createFont(font, text_size)
         textFont(text_font)
             
-        fill(0, 0, 0, 7)
+        # Text properties
+        fill(0, 0, 24.7, 4)  #3f3f3f
+        #fill(168, 31.7, 74.1, 4)  #81bdb1
+        stroke(0, 0, 0)
         textAlign(CENTER, BOTTOM)
         textSize(text_size)
         
-        for c in string.digits:
-            text(c, center, 4*text_area)
+        offset = h/6
+        print_string_stack(string.punctuation, 1*offset)
+        print_string_stack(string.ascii_lowercase, 2*offset)
+        print_string_stack(string.printable, 3*offset)
+        print_string_stack(string.ascii_uppercase, 4*offset)
+        print_string_stack(string.digits, 5*offset)
             
-        for c in string.ascii_lowercase:
-            text(c, center, 1*text_area)
-        
-        for c in string.ascii_uppercase:
-            text(c, center, 2*text_area)
-            
-        for c in string.printable:
-            text(c, w/2, 3*text_area)
-            
-        fill(0, 0, 0, 50)
-        textAlign(CENTER, BOTTOM)
-        textSize(20)
-        text(font, w/2, h-50)
-        
-        output_filename = os.path.join('output', 'center', 'center_{}.png'.format(font))
-        saveFrame(output_filename)
-        print(output_filename)
-        
-    center = w/2-70
-    for font in PFont.list():
-        
-        background(0, 0, 97)
-        
-        text_font = createFont(font, text_size)
+        # Prints the name of the font
+        text_font = createFont('Consolas', text_size)
         textFont(text_font)
-            
-        fill(0, 0, 0, 7)
-        textAlign(LEFT, BOTTOM)
-        textSize(text_size)
-        
-        for c in string.digits:
-            text(c, center, 4*text_area)
-            
-        for c in string.ascii_lowercase:
-            text(c, center, 1*text_area)
-        
-        for c in string.ascii_uppercase:
-            text(c, center, 2*text_area)
-            
-        for c in string.printable:
-            text(c, center, 3*text_area)
-            
-        fill(0, 0, 0, 50)
+        fill(0, 0, 0, 30)
         textAlign(CENTER, BOTTOM)
-        textSize(20)
-        text(font, w/2, h-50)
+        textSize(25)
+        text(font, w/2, 5.6*offset)
         
-        output_filename = os.path.join('output', 'left', 'left_{}.png'.format(font))
+        
+        font_name = font.replace('\\', '')
+        font_name = font.replace('/', '')
+        output_filename = os.path.join('output', '{}_{}_{}.png'.format(timestamp, text_size, font_name))
         saveFrame(output_filename)
         print(output_filename)
-
+    
 def random_list_value(val_list):
     index = int(random(0, len(val_list)))
     value = val_list[index]
     return value
         
         
-def circle_dots(hsba=(0, 50, 50, 50), center=(w/2,h/2), number=100, radius=(200,200), spread=[10], stroke_weight=0.7):
-    for s in spread:
-        for i in range(number):
-            r_offset = randomGaussian()*s
-            x = center[0] + (radius[0] + r_offset) * cos(TWO_PI * i / number) 
-            y = center[1] + (radius[1] + r_offset) * sin(TWO_PI * i / number)
-            strokeWeight(stroke_weight)
-            stroke(color(*hsba))
-            point(x, y)
-        
-def circle_lines(hsba=(0, 50, 50, 50), center=(w/2,h/2), number=100, radius=(200, 200), spread=[10], stroke_weight=0.7, center_offset=10):
-    for i in range(number):
-        r_offset = randomGaussian()*spread[0]
-        d_x = 2*radius[0] + r_offset
-        d_y = 2*radius[1] + r_offset
-        noFill()
-        strokeWeight(stroke_weight)
-        stroke(color(*hsba))
-        ellipse(center[0]+randomGaussian()*center_offset, center[1]+randomGaussian()*center_offset, d_x, d_y)
+def random_centered(value_og, offset=5):
+    value = random(value_og-offset, value_og+offset)
+    return value
 
-def pg_circle_dots(pg, hsba=(0, 50, 50, 50), center=(w/2,h/2), number=100, radius=(200,200), spread=[10], stroke_weight=0.7):
-    pg.beginDraw()
-    for s in spread:
-        for i in range(number):
-            r_offset = randomGaussian()*s
-            x = center[0] + (radius[0] + r_offset) * cos(TWO_PI * i / number) 
-            y = center[1] + (radius[1] + r_offset) * sin(TWO_PI * i / number)
-            pg.strokeWeight(stroke_weight)
-            pg.stroke(color(*hsba))
-            pg.point(x, y)
-    pg.endDraw()
-        
-def pg_circle_lines(pg, hsba=(0, 50, 50, 50), center=(w/2,h/2), number=100, radius=(200, 200), spread=[10], stroke_weight=0.7, center_offset=10):
-    pg.beginDraw()
-    for i in range(number):
-        r_offset = randomGaussian()*spread[0]
-        d_x = 2*radius[0] + r_offset
-        d_y = 2*radius[1] + r_offset
-        pg.noFill()
-        pg.strokeWeight(stroke_weight)
-        pg.stroke(color(*hsba))
-        pg.ellipse(center[0]+randomGaussian()*center_offset, center[1]+randomGaussian()*center_offset, d_x, d_y)
-    pg.endDraw()
     
-
-def normalize_list(val_list, a, b):
-    a = float(a)
-    b = float(b)
-    normalized = []
-    for val in val_list:
-        normalized.append((b - a) * (val - min(val_list)) / (max(val_list) - min(val_list)) + a)
-    return normalized
-
-def select_palette(idx=None):
-    print(idx)
-    palettes = ['cmyk', 'warhol', 'van_gogh', 'turner', 'blue', 'black', 'red']  
-    color_dict = {0: [[180, 100, 100], #00ffff cyan
-                  [300, 100, 100],     #ff00ff magenta
-                  [60, 100, 100],      #ffff00 yellow
-                  [0, 0, 0],           #000000 black
-                  [0, 0, 100]          # background
-                  ],
-              # From Warhol's Mick Jagger
-              1: [[41, 41, 66],   #a99364 brown  
-                  [342, 32, 85],  #da95aa pink
-                  [45, 7, 96],    #f4f0e4 cream
-                  [354, 60, 72],  #b74954 red
-                  [98, 19, 87],   #c2ddb2 green
-                  [0, 0, 100]     # background
-                  ],
-              # From Van Gogh's Bedroom
-              2: [[225, 61, 55], #374D8D blue
-                  [226, 28, 80], #93A0CB light blue
-                  [95, 39, 66],  #82A866 green
-                  [54, 66, 77],  #C4B743 yellow
-                  [19, 75, 64],  #A35029 dark orange
-                  [0, 0, 100]    # background
-                  ],
-              # From JMW Turner's Mountain Scene
-              3: [[51, 15, 95],  #F1ECCE cream
-                  [227, 13, 71], #9EA3B5 gray
-                  [48, 42, 91],  #E9D688 tan
-                  [18, 68, 66],  #A85835 dark orange
-                  [34, 60, 68],  #AE8045 brown
-                  [0, 0, 100]    # background
-                  ],
-              # Just blue and white
-              4: [[198, 62, 75],
-                  [0, 0, 100]
-                  ],
-              # Just black and white
-              5: [[0, 0, 5],
-                  [0, 0, 100]
-                  ],
-              # Just red and white
-              6: [[348, 63, 84],
-                  [0, 0, 100]
-                  ],
-              }  
-
-    # Select random color palette if none specified
-    if idx is None:
-        idx = int(random(0, len(color_dict.keys())))
-    palette_name = palettes[idx]
-    palette = color_dict[idx]
-    
-    return palette_name, palette
-    
-def border():
-    noStroke()
-    fill(color(0, 0, 0))
-    #fill(g.backgroundColor)
-    rect(0, 0, width, border_pad)  # Top
-    rect(0, 0, border_pad, height)  # Left
-    rect(0, height - border_pad, width, border_pad)  # Bottom
-    rect(width - border_pad, 0, border_pad, height)  # Right
-    
+def print_string_stack(string_stack='TESt', offset=100):
+    for c in string_stack:
+        text(c, w/2, offset)
+     
+     
 def create_filename(word, num_list=[]):
     filename = word
     for number in num_list:
         filename = filename + '_{:04}'.format(int(number))
     filename = filename + '.png'
     return filename
-    
-def annotate(num_circles, num_cols, xy_noise):
-    stroke(0)
-    fill(0)
-    textFont(createFont('Courier',100))
-    textAlign(LEFT, TOP)
-    textSize(height*0.013)
-    text('concentric_{:02}_{:02}_{:01}.png\nEmulating @paulrickards'.format(num_circles, num_cols, int(xy_noise*10)), width*pad_pct, height - (height*pad_pct*0.9))
-    textAlign(RIGHT, TOP)
-    text('Aaron Penne', width - width*pad_pct, height - (height*pad_pct*0.9))
-    
-    
-
-
-
-    

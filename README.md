@@ -1,6 +1,6 @@
 ## Font Fingerprints ([source](https://github.com/aaronpenne/generative_art/tree/master/processing_python/font_fingerprints))
 
-<p align="center"><img src="https://github.com/aaronpenne/generative_art/blob/master/processing_python/font_fingerprints/curated/20180907_005302_QuicksandLight-Regular.png" alt="quicksand" width="60%"></p>
+<p align="center"><img src="https://github.com/aaronpenne/generative_art/blob/master/processing_python/font_fingerprints/curated_mac/20180907_092520_CourierNewPSMT.png" alt="courier" width="60%"></p>
 
 <p align="center"><img src="https://github.com/aaronpenne/generative_art/blob/master/processing_python/font_fingerprints/curated_mac/20180907_092520_Webdings.png" alt="webdings" width="60%"></p>
 

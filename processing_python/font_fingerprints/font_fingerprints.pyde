@@ -11,8 +11,8 @@ import sys
 # Define globals here
 rand_seed = 1138
 frame_rate = 1
-w = 800  # width
-h = 800  # height
+w = 600  # width
+h = 1040  # height
 border_pad = 60
 count = 0
 
@@ -36,13 +36,13 @@ def setup():
     # Set (x, y) to center
     imageMode(CENTER)
     ellipseMode(CENTER)
-    textMode(CENTER)
+    #textMode(CENTER)
     rectMode(CENTER)
     
     background(0, 0, 97)
     
     # Stops draw() from running in an infinite loop (should be last line)
-    #randomSeed(rand_seed)
+    randomSeed(rand_seed)
     noLoop()
 
 
@@ -53,23 +53,81 @@ def draw():
         sys.exit(0)
     count += 1
 
-    background(0, 0, 97)
     
     palette_name, palette = select_palette(idx=0)
     print(palette_name)
     # c = palette[3]
     # print(c)
     
-    text_size = 400
-    fill(0, 0, 0, 10)
-    textSize(text_size)
-    for c in string.printable:
-        text(c, w/2, h/2)
-    
-    output_filename = os.path.join('output', '_#######.png')
-    filename = create_filename('sinful')
-    saveFrame(output_filename)
-    print(output_filename)
+
+    text_size = 200
+    text_area = text_size * 1.2
+
+    center = w/2
+    for font in PFont.list():
+        
+        background(0, 0, 97)
+        
+        text_font = createFont(font, text_size)
+        textFont(text_font)
+            
+        fill(0, 0, 0, 7)
+        textAlign(CENTER, BOTTOM)
+        textSize(text_size)
+        
+        for c in string.digits:
+            text(c, center, 4*text_area)
+            
+        for c in string.ascii_lowercase:
+            text(c, center, 1*text_area)
+        
+        for c in string.ascii_uppercase:
+            text(c, center, 2*text_area)
+            
+        for c in string.printable:
+            text(c, w/2, 3*text_area)
+            
+        fill(0, 0, 0, 50)
+        textAlign(CENTER, BOTTOM)
+        textSize(20)
+        text(font, w/2, h-50)
+        
+        output_filename = os.path.join('output', 'center', 'center_{}.png'.format(font))
+        saveFrame(output_filename)
+        print(output_filename)
+        
+    center = w/2-70
+    for font in PFont.list():
+        
+        background(0, 0, 97)
+        
+        text_font = createFont(font, text_size)
+        textFont(text_font)
+            
+        fill(0, 0, 0, 7)
+        textAlign(LEFT, BOTTOM)
+        textSize(text_size)
+        
+        for c in string.digits:
+            text(c, center, 4*text_area)
+            
+        for c in string.ascii_lowercase:
+            text(c, center, 1*text_area)
+        
+        for c in string.ascii_uppercase:
+            text(c, center, 2*text_area)
+            
+        for c in string.printable:
+            text(c, center, 3*text_area)
+            
+        fill(0, 0, 0, 50)
+        textAlign(CENTER, BOTTOM)
+        textSize(20)
+        text(font, w/2, h-50)
+        
+        output_filename = os.path.join('output', 'left', 'left_{}.png'.format(font))
+        saveFrame(output_filename)
+        print(output_filename)
 
 def random_list_value(val_list):
     index = int(random(0, len(val_list)))

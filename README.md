@@ -1,10 +1,12 @@
 ## Circles with shadows ([source](https://github.com/aaronpenne/generative_art/tree/master/processing_python/circle_shadows_3d))
 
-<p align="center"><img src="https://github.com/aaronpenne/generative_art/blob/master/processing_python/circle_shadows_3d/images/white_circles_a.png" alt="fingerprint_square" width="60%"></p>
+<p align="center"><img src="https://github.com/aaronpenne/generative_art/blob/master/processing_python/circle_shadows_3d/images/white_circles_c.png" alt="white_squares" width="60%"></p>
+
+<p align="center"><img src="https://github.com/aaronpenne/generative_art/blob/master/processing_python/circle_shadows_3d/images/red_circles_b.png" alt="red_squares" width="60%"></p>
 
 Here's an animation showing the process it took to get from a single circle to something interesting. Lots of "figuring out" going on here.
 
-<p align="center"><img src="https://github.com/aaronpenne/generative_art/blob/master/processing_python/circle_shadows_3d/images/circle_shadows_process.gif" width="60%"></p>
+<p align="center"><img src="https://github.com/aaronpenne/generative_art/blob/master/processing_python/circle_shadows_3d/images/circle_shadows_process.gif" alt="circle_process" width="60%"></p>
 
 ## Font Fingerprints Square with Webdings
 

@@ -18,7 +18,7 @@ timestamp = datetime.datetime.now().strftime('%Y%m%d_%H%M%S')
 
 def setup():
     # Sets size of canvas in pixels (must be first line)
-    size(w, h) # (width, height)
+    size(w, h, P3D) # (width, height)
     
     # Sets resolution dynamically (affects resolution of saved image)
     pixelDensity(displayDensity())  # 1 for low, 2 for high
@@ -32,38 +32,54 @@ def setup():
     imageMode(CENTER)
         
     # Stops draw() from running in an infinite loop (should be last line)
-    randomSeed(rand_seed)
-    noLoop()
+    #randomSeed(rand_seed)
+    #noLoop()
 
 
 def draw():
     global count
-    if count > 1000:
+    if count > 10:
         sys.exit(0)
     count += 1
     
-    background(41.9, 34, 99.2)
+    background(0, 0, 100)
     translate(w/2, h/2)
-    noStroke()
-    fill(0, 53.1, 88.6)
     
-    grid_x = [-200, 0, 200]
-    grid_y = [-200, 0, 200]
-    #grid_x = [-600, -400, -200, 0, 200, 400, 600]
-    #grid_y = [-600, -400, -200, 0, 200, 400, 600]
+    #grid_x = [-200, 0, 200]
+    #grid_y = [-200, 0, 200]
+    grid_x = [-300, -200, -100, 0, 100, 200, 300]
+    grid_y = [-300, -200, -100, 0, 100, 200, 300]
     
-    for x in grid_x:
-        for y in grid_y:
+    # x_skip = int(random(0, len(grid_x)+1))
+    # y_skip = int(random(0, len(grid_y)+1))
+    # print(x_skip, y_skip)
+    
+    # Draw all the shadows first
+    for ix, x in enumerate(grid_x):
+        for iy, y in enumerate(grid_y):
+            ellipse_values = (x, y, 40, 40)
+            pushMatrix()
+            translate(0, 0, -10)
+            # if (ix!=x_skip) or (iy!=y_skip):
+            #     shadow_ellipse(ellipse_values, colors_tuple=(0, 0, 0, 40), w_offset=0, h_offset=0, blur=7)
+            shadow_ellipse(ellipse_values, colors_tuple=(0, 0, 0, 40), w_offset=0, h_offset=0, blur=7)
+            popMatrix()
+            
+    # Draw all the circles next
+    for ix, x in enumerate(grid_x):
+        for iy, y in enumerate(grid_y):
             ellipse_values = (x, y, 50, 50)
-            shadow_ellipse(ellipse_values, colors_tuple=(0, 0, 0, 80), w_offset=10, h_offset=20, blur=0)
-    for x in grid_x:
-        for y in grid_y:
-            ellipse_values = (x, y, 50, 50)
-            fill(0, 53.1, 88.6)
+            noStroke()
+            fill(0,0,100)
+            pushMatrix()
+            z = random(-10, 40)
+            translate(0, 0, z)
+            print(ix, iy, z)
+            # if (ix!=x_skip) or (iy!=y_skip):
+            #     ellipse(*ellipse_values)
             ellipse(*ellipse_values)
+            popMatrix()
         
-
-
     save_frame_timestamp('ellipse', timestamp)
 
 
@@ -75,10 +91,10 @@ def shadow_ellipse(values_tuple, colors_tuple=(0, 0, 0, 80), w_offset=10, h_offs
     
     shadow = createGraphics(w_shape*4, h_shape*4)
     shadow.beginDraw()
-    shadow.background(0, 0, 0)
     shadow.noStroke()
     shadow.fill(*colors_tuple)
-    shadow.ellipse(0, 0, w_shape+x_offset, h_shape+y_offset)
+    shadow.translate(w_shape*4/2, h_shape*4/2)
+    shadow.ellipse(0+w_offset, 0+h_offset, w_shape, h_shape)
     shadow.endDraw()
     shadow.filter(BLUR, blur)
     image(shadow, x_shape, y_shape)
@@ -88,7 +104,7 @@ def shadow_ellipse(values_tuple, colors_tuple=(0, 0, 0, 80), w_offset=10, h_offs
 def save_frame_timestamp(filename, timestamp='', output_dir='output'):
     filename = filename.replace('\\', '')
     filename = filename.replace('/', '')
-    output_filename = os.path.join(output_dir, '{}_{}.png'.format(timestamp, filename))
+    output_filename = os.path.join(output_dir, '{}_{}_###.png'.format(timestamp, filename))
     saveFrame(output_filename)
     print(output_filename)
     
@@ -103,7 +119,15 @@ def random_centered(value_og, offset=5):
     value = random(value_og-offset, value_og+offset)
     return value
 
-    
+def random_gaussian_limit(min_val, max_val):
+    new_val = max_val*randomGaussian()+min_val
+    if new_val < min_val:
+        new_val = min_val
+    elif new_val > max_val:
+        new_val = max_val
+    return new_val
+                                    
+                          
 def print_string_stack(string_stack='TESt', w_offset=100, h_offset=100):
     for c in string_stack:
         text(c, w_offset, h_offset)

@@ -55,7 +55,7 @@ def draw():
     for x in grid_x:
         for y in grid_y:
             ellipse_values = (x, y, 50, 50)
-            shadow_ellipse(ellipse_values, colors_tuple=(0, 0, 0, 80), w_offset=10, h_offset=20, blur=0)
+            shadow_ellipse(ellipse_values, colors_tuple=(0, 0, 0, 40), w_offset=10, h_offset=20, blur=7)
     for x in grid_x:
         for y in grid_y:
             ellipse_values = (x, y, 50, 50)
@@ -75,10 +75,10 @@ def shadow_ellipse(values_tuple, colors_tuple=(0, 0, 0, 80), w_offset=10, h_offs
     
     shadow = createGraphics(w_shape*4, h_shape*4)
     shadow.beginDraw()
-    shadow.background(0, 0, 0)
     shadow.noStroke()
     shadow.fill(*colors_tuple)
-    shadow.ellipse(0, 0, w_shape+x_offset, h_shape+y_offset)
+    shadow.translate(w_shape*4/2, h_shape*4/2)
+    shadow.ellipse(0+w_offset, 0+h_offset, w_shape, h_shape)
     shadow.endDraw()
     shadow.filter(BLUR, blur)
     image(shadow, x_shape, y_shape)

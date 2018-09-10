@@ -11,8 +11,8 @@ import sys
 # Define globals here
 rand_seed = 1138
 frame_rate = 1
-w = 800  # width
-h = 800  # height
+w = 2000  # width
+h = 2000  # height
 count = 0
 timestamp = datetime.datetime.now().strftime('%Y%m%d_%H%M%S')
 
@@ -32,8 +32,8 @@ def setup():
     imageMode(CENTER)
         
     # Stops draw() from running in an infinite loop (should be last line)
-    #randomSeed(rand_seed)
-    #noLoop()
+    randomSeed(rand_seed)
+    noLoop()
 
 
 def draw():
@@ -42,27 +42,27 @@ def draw():
         sys.exit(0)
     count += 1
     
-    background(0, 0, 100)
+    background(42, 34, 99)
     translate(w/2, h/2)
     
-    r = 20
-    grid_x = [x for x in range(-300, 300, int(r*1.2))]
-    grid_y = [y for y in range(-300, 300, int(r*1.2))]
+    r = 140
+    grid_x = [x for x in range(int(-w/2 + 2*r), int(w/2 - r), int(r*1.5))]
+    grid_y = [y for y in range(int(-h/2 + 2*r), int(h/2 - r), int(r*1.5))]
     print(grid_x)
     
-    # x_skip = int(random(0, len(grid_x)+1))
-    # y_skip = int(random(0, len(grid_y)+1))
-    # print(x_skip, y_skip)
+    x_skip = int(random(0, len(grid_x)+1))
+    y_skip = int(random(0, len(grid_y)+1))
+    print(x_skip, y_skip)
     
     # Draw all the shadows first
     for ix, x in enumerate(grid_x):
         for iy, y in enumerate(grid_y):
-            ellipse_values = (x, y, r*0.7, r*0.7)
+            ellipse_values = (x, y, r*0.9, r*0.9)
             pushMatrix()
             translate(0, 0, -10)
-            # if (ix!=x_skip) or (iy!=y_skip):
-            #     shadow_ellipse(ellipse_values, colors_tuple=(0, 0, 0, 40), w_offset=0, h_offset=0, blur=7)
-            shadow_ellipse(ellipse_values, colors_tuple=(0, 0, 0, 40), w_offset=0, h_offset=0, blur=5)
+            if (ix!=x_skip) or (iy!=y_skip):
+                shadow_ellipse(ellipse_values, colors_tuple=(0, 0, 0, 80), w_offset=0, h_offset=0, blur=7)
+            #shadow_ellipse(ellipse_values, colors_tuple=(0, 0, 0, 40), w_offset=0, h_offset=0, blur=5)
             popMatrix()
             
     # Draw all the circles next
@@ -70,14 +70,14 @@ def draw():
         for iy, y in enumerate(grid_y):
             ellipse_values = (x, y, r, r)
             noStroke()
-            fill(0,0,100)
+            fill(6, 74, 91)
             pushMatrix()
-            z = random(-10, 5)
+            z = random(-10, r*0.7)
             translate(0, 0, z)
             print(ix, iy, z)
-            # if (ix!=x_skip) or (iy!=y_skip):
-            #     ellipse(*ellipse_values)
-            ellipse(*ellipse_values)
+            if (ix!=x_skip) or (iy!=y_skip):
+                ellipse(*ellipse_values)
+            #ellipse(*ellipse_values)
             popMatrix()
         
     save_frame_timestamp('ellipse', timestamp)

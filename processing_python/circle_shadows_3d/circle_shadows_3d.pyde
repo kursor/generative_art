@@ -38,17 +38,17 @@ def setup():
 
 def draw():
     global count
-    if count > 10:
+    if count > 30:
         sys.exit(0)
     count += 1
     
     background(0, 0, 100)
     translate(w/2, h/2)
     
-    #grid_x = [-200, 0, 200]
-    #grid_y = [-200, 0, 200]
-    grid_x = [-300, -200, -100, 0, 100, 200, 300]
-    grid_y = [-300, -200, -100, 0, 100, 200, 300]
+    r = 20
+    grid_x = [x for x in range(-300, 300, int(r*1.2))]
+    grid_y = [y for y in range(-300, 300, int(r*1.2))]
+    print(grid_x)
     
     # x_skip = int(random(0, len(grid_x)+1))
     # y_skip = int(random(0, len(grid_y)+1))
@@ -57,22 +57,22 @@ def draw():
     # Draw all the shadows first
     for ix, x in enumerate(grid_x):
         for iy, y in enumerate(grid_y):
-            ellipse_values = (x, y, 40, 40)
+            ellipse_values = (x, y, r*0.7, r*0.7)
             pushMatrix()
             translate(0, 0, -10)
             # if (ix!=x_skip) or (iy!=y_skip):
             #     shadow_ellipse(ellipse_values, colors_tuple=(0, 0, 0, 40), w_offset=0, h_offset=0, blur=7)
-            shadow_ellipse(ellipse_values, colors_tuple=(0, 0, 0, 40), w_offset=0, h_offset=0, blur=7)
+            shadow_ellipse(ellipse_values, colors_tuple=(0, 0, 0, 40), w_offset=0, h_offset=0, blur=5)
             popMatrix()
             
     # Draw all the circles next
     for ix, x in enumerate(grid_x):
         for iy, y in enumerate(grid_y):
-            ellipse_values = (x, y, 50, 50)
+            ellipse_values = (x, y, r, r)
             noStroke()
             fill(0,0,100)
             pushMatrix()
-            z = random(-10, 40)
+            z = random(-10, 5)
             translate(0, 0, z)
             print(ix, iy, z)
             # if (ix!=x_skip) or (iy!=y_skip):
@@ -89,7 +89,7 @@ def shadow_ellipse(values_tuple, colors_tuple=(0, 0, 0, 80), w_offset=10, h_offs
     w_shape = values_tuple[2]
     h_shape = values_tuple[3]
     
-    shadow = createGraphics(w_shape*4, h_shape*4)
+    shadow = createGraphics(int(w_shape*4), int(h_shape*4))
     shadow.beginDraw()
     shadow.noStroke()
     shadow.fill(*colors_tuple)

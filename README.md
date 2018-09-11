@@ -1,5 +1,8 @@
 ## Circles with shadows ([source](https://github.com/aaronpenne/generative_art/tree/master/processing_python/circle_shadows_3d))
 
+<p align="center"><img src="https://github.com/aaronpenne/generative_art/blob/master/processing_python/circle_shadows_3d/images/wallpaper_big_calm.png" alt="wallpaper" width="90%"></p>
+
+
 <p align="center"><img src="https://github.com/aaronpenne/generative_art/blob/master/processing_python/circle_shadows_3d/images/red_circles_b.png" alt="red_squares" width="60%"></p>
 
 <p align="center"><img src="https://github.com/aaronpenne/generative_art/blob/master/processing_python/circle_shadows_3d/images/white_circles_c.png" alt="white_squares" width="60%"></p>

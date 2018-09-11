@@ -1,5 +1,7 @@
 ## Circles with shadows ([source](https://github.com/aaronpenne/generative_art/tree/master/processing_python/circle_shadows_3d))
 
+<p align="center"><img src="https://github.com/aaronpenne/generative_art/blob/master/processing_python/circle_shadows_3d/images/wallpaper_big.png" alt="zenburn" width="60%"></p>
+
 <p align="center"><img src="https://github.com/aaronpenne/generative_art/blob/master/processing_python/circle_shadows_3d/images/white_circles_c.png" alt="white_squares" width="60%"></p>
 
 <p align="center"><img src="https://github.com/aaronpenne/generative_art/blob/master/processing_python/circle_shadows_3d/images/red_circles_b.png" alt="red_squares" width="60%"></p>
@@ -62,4 +64,3 @@ Here's an animation showing the process. This was a quick 30 minute session to t
 ## Having fun with test data in matplotlib
 
 <p align="center"><img src="https://github.com/aaronpenne/generative_art/blob/master/pure_python/images/first_attempt.png" alt="test_data" width="60%"></p>
-

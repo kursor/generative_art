@@ -11,10 +11,19 @@ import sys
 # Define globals here
 rand_seed = 1138
 frame_rate = 1
-w = 2000  # width
-h = 2000  # height
+w = 2880  # width
+h = 1800  # height
 count = 0
 timestamp = datetime.datetime.now().strftime('%Y%m%d_%H%M%S')
+
+
+pal = [(60, 7, 86),   #dcdccc cream
+       (0, 28, 80),   #cc9393 pink
+       (180, 9, 69),  #9fafaf blue gray
+       (0, 13, 74),   #bca3a3 mauve
+       (24, 31, 100), #ffcfaf peach
+       (150, 22, 56), #709080 green
+      ]
 
 def setup():
     # Sets size of canvas in pixels (must be first line)
@@ -42,10 +51,10 @@ def draw():
         sys.exit(0)
     count += 1
     
-    background(42, 34, 99)
+    background(0, 0, 25)
     translate(w/2, h/2)
     
-    r = 140
+    r = 40
     grid_x = [x for x in range(int(-w/2 + 2*r), int(w/2 - r), int(r*1.5))]
     grid_y = [y for y in range(int(-h/2 + 2*r), int(h/2 - r), int(r*1.5))]
     print(grid_x)
@@ -61,7 +70,7 @@ def draw():
             pushMatrix()
             translate(0, 0, -10)
             if (ix!=x_skip) or (iy!=y_skip):
-                shadow_ellipse(ellipse_values, colors_tuple=(0, 0, 0, 80), w_offset=0, h_offset=0, blur=7)
+                shadow_ellipse(ellipse_values, colors_tuple=(0, 0, 0, 100), w_offset=0, h_offset=0, blur=10)
             #shadow_ellipse(ellipse_values, colors_tuple=(0, 0, 0, 40), w_offset=0, h_offset=0, blur=5)
             popMatrix()
             
@@ -70,11 +79,19 @@ def draw():
         for iy, y in enumerate(grid_y):
             ellipse_values = (x, y, r, r)
             noStroke()
-            fill(6, 74, 91)
+            
+            c = random_list_value(pal)
+            fill(*c)
+            
+            # if random_list_value([True, False]):
+            #     c = random_list_value(pal)
+            #     fill(*c)
+            # else:
+            #     fill(*pal[0])
+        
             pushMatrix()
-            z = random(-10, r*0.7)
+            z = random(-10, r*0.8)
             translate(0, 0, z)
-            print(ix, iy, z)
             if (ix!=x_skip) or (iy!=y_skip):
                 ellipse(*ellipse_values)
             #ellipse(*ellipse_values)

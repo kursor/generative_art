@@ -12,7 +12,7 @@ import sys
 rand_seed = 1138
 frame_rate = 1
 w = 2880  # width
-h = 1800  # height
+h = 2880  # height
 count = 0
 timestamp = datetime.datetime.now().strftime('%Y%m%d_%H%M%S')
 
@@ -20,7 +20,7 @@ timestamp = datetime.datetime.now().strftime('%Y%m%d_%H%M%S')
 pal = [(60, 7, 86),   #dcdccc cream
        (0, 28, 80),   #cc9393 pink
        (180, 9, 69),  #9fafaf blue gray
-       (0, 13, 74),   #bca3a3 mauve
+       #(0, 13, 74),   #bca3a3 mauve
        (24, 31, 100), #ffcfaf peach
        (150, 22, 56), #709080 green
       ]
@@ -41,7 +41,7 @@ def setup():
     imageMode(CENTER)
         
     # Stops draw() from running in an infinite loop (should be last line)
-    randomSeed(rand_seed)
+    # randomSeed(rand_seed)
     noLoop()
 
 
@@ -54,7 +54,7 @@ def draw():
     background(0, 0, 25)
     translate(w/2, h/2)
     
-    r = 40
+    r = 140
     grid_x = [x for x in range(int(-w/2 + 2*r), int(w/2 - r), int(r*1.5))]
     grid_y = [y for y in range(int(-h/2 + 2*r), int(h/2 - r), int(r*1.5))]
     print(grid_x)

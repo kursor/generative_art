@@ -54,22 +54,24 @@ def draw():
         sys.exit(0)
     count += 1
     
-    background(0, 0, 100)
+    background(0, 0, 25)
     
     translate(w/2, h/2)
     
-    create_mask()
-    
-    # prev_c = pal[0]
-    # for ix, r in enumerate([100, 150, 200, 300, 400, 500, 600]):
-    #     c = pal[ix]
-    #     draw_shadow((prev_c[0], prev_c[1], 20, 70), (w/2, h/2, r, r))
-    #     draw_shape(c, (w/2, h/2, r+7, r+7))
-    #     prev_c = c
-        
-    save_frame_timestamp('hole', timestamp)
+    #create_mask()
 
-def draw_shadow(prev_color, next_shape_vals, hard_offset=5, soft_offset=-5):
+    for offset in range(0, 41, 1):
+        background(0, 0, 25)
+        prev_c = pal[0]
+        for ix, r in enumerate([100, 150, 200, 300, 400, 500, 600]):
+            c = pal[ix]
+            draw_shadow((prev_c[0], prev_c[1], 20, 70), (w/2+(offset-20)*ix, h/2+(offset-20)*ix, r, r), hard_offset=10+1000/r)
+            draw_shape(c, (w/2+(offset-20)*ix, h/2+(offset-20)*ix, r+7, r+7))
+            prev_c = c
+            
+        save_frame_timestamp('hole_{:02}'.format(offset), timestamp)
+
+def draw_shadow(prev_color, next_shape_vals, hard_offset=10, soft_offset=-5):
     v = next_shape_vals
     img = createGraphics(w, h)
     img.beginDraw()
@@ -78,31 +80,18 @@ def draw_shadow(prev_color, next_shape_vals, hard_offset=5, soft_offset=-5):
     img.blendMode(REPLACE)
     img.fill(0, 0, 100, 0)
     img.noStroke()
-    img.ellipse(v[0]+hard_offset, v[1]+hard_offset, v[2], v[3])
+    img.ellipse(v[0]+hard_offset, v[1]+hard_offset, v[2]-hard_offset, v[3]-hard_offset)
     img.blendMode(BLEND)
     img.endDraw()
     image(img, 0, 0)
-        
-    img = createGraphics(w, h)
-    img.beginDraw()
-    img.colorMode(HSB, 360, 100, 100, 100)
-    img.background(*prev_color)
-    img.blendMode(REPLACE)
-    img.fill(0, 0, 100, 0)
-    img.noStroke()
-    img.ellipse(v[0]+soft_offset, v[1]+soft_offset, v[2]+soft_offset, v[3]+soft_offset)
-    img.blendMode(BLEND)
-    img.filter(BLUR, 10)
-    img.endDraw()
-    image(img, 0, 0)
+
     
 def draw_shape(this_color, next_shape_vals):
     v = next_shape_vals
     img = createGraphics(w, h)
     img.beginDraw()
     img.colorMode(HSB, 360, 100, 100, 100)
-    img.fill(*this_color)
-    img.rect(0, 0, w, h)
+    img.background(*this_color)
     img.blendMode(REPLACE)
     img.fill(0, 0, 100, 0)
     img.noStroke()
@@ -112,18 +101,17 @@ def draw_shape(this_color, next_shape_vals):
     image(img, 0, 0)
     
 
-def create_mask(filename='mask.png', blur=20):
+def create_mask():
     img = createGraphics(w, h)
     img.beginDraw()
     img.colorMode(HSB, 360, 100, 100, 100)
     img.fill(0, 0, 0)
     img.noStroke()
     img.ellipse(w/2, h/2, w*0.8, h*0.8)
-    img.filter(BLUR, blur)
+    img.filter(BLUR, 20)
     img.endDraw()
     image(img, 0, 0)
-    save(filename)
-    
+        
                    
 def save_frame_timestamp(filename, timestamp='', output_dir='output'):
     filename = filename.replace('\\', '')

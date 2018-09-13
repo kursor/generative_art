@@ -4,12 +4,12 @@
 <p align="center"><img src="https://github.com/aaronpenne/generative_art/blob/master/processing_python/hole/images/hole_on_the_move.gif" alt="hole_gif" width="70%"></p>
 
 
-## Circles with shadows ([source](https://github.com/aaronpenne/generative_art/tree/master/processing_python/circle_shadows_3d))
+## Dots ([source](https://github.com/aaronpenne/generative_art/tree/master/processing_python/dots))
 
-<p align="center"><img src="https://github.com/aaronpenne/generative_art/blob/master/processing_python/circle_shadows_3d/images/wallpaper_big_calm.png" alt="wallpaper" width="90%"></p>
+<p align="center"><img src="https://github.com/aaronpenne/generative_art/blob/master/processing_python/dots/images/wallpaper_big_calm.png" alt="wallpaper" width="90%"></p>
 
 
-<p align="center"><img src="https://github.com/aaronpenne/generative_art/blob/master/processing_python/circle_shadows_3d/images/red_circles_b.png" alt="red_squares" width="60%"></p>
+<p align="center"><img src="https://github.com/aaronpenne/generative_art/blob/master/processing_python/dots/images/red_circles_b.png" alt="red_squares" width="60%"></p>
 
 ## Font Fingerprints Square with Webdings
 

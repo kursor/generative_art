@@ -11,8 +11,8 @@ import sys
 # Define globals here
 rand_seed = 1138
 frame_rate = 1
-w = 1500  # width
-h = 500  # height
+w = 1000  # width
+h = 1000  # height
 count = 0
 timestamp = datetime.datetime.now().strftime('%Y%m%d_%H%M%S')
 
@@ -20,14 +20,15 @@ timestamp = datetime.datetime.now().strftime('%Y%m%d_%H%M%S')
 pal = [(60, 7, 86),   #dcdccc cream
        (0, 28, 80),   #cc9393 pink
        (180, 9, 69),  #9fafaf blue gray
-       #(0, 13, 74),   #bca3a3 mauve
+       (0, 13, 74),   #bca3a3 mauve
        (24, 31, 100), #ffcfaf peach
        (150, 22, 56), #709080 green
+       (0, 0, 100),
       ]
 
 def setup():
     # Sets size of canvas in pixels (must be first line)
-    size(w, h, P3D) # (width, height)
+    size(w, h) # (width, height)
     
     # Sets resolution dynamically (affects resolution of saved image)
     pixelDensity(displayDensity())  # 1 for low, 2 for high
@@ -39,6 +40,8 @@ def setup():
     frameRate(frame_rate)
     
     imageMode(CENTER)
+    rectMode(CENTER)
+    ellipseMode(CENTER)
         
     # Stops draw() from running in an infinite loop (should be last line)
     # randomSeed(rand_seed)
@@ -51,54 +54,47 @@ def draw():
         sys.exit(0)
     count += 1
     
-    background(0, 0, 25)
+    background(10, 46, 80)
+    
     translate(w/2, h/2)
     
-    r = 40
-    grid_x = [x for x in range(int(-w/2 + 4*r), int(w/2 - 3*r), int(r*1.5))]
-    grid_y = [y for y in range(int(-h/2 + 3*r), int(h/2 - 2*r), int(r*1.5))]
-    
-    x_skip = int(random(1, len(grid_x)))
-    y_skip = int(random(1, len(grid_y)))
-    print(x_skip, y_skip)
-    
-    # Draw all the shadows first
-    for ix, x in enumerate(grid_x):
-        for iy, y in enumerate(grid_y):
-            ellipse_values = (x, y, r*0.9, r*0.9)
-            pushMatrix()
-            translate(0, 0, -10)
-            if (ix!=x_skip) or (iy!=y_skip):
-                shadow_ellipse(ellipse_values, colors_tuple=(0, 0, 0, 100), w_offset=0, h_offset=0)
-            #shadow_ellipse(ellipse_values, colors_tuple=(0, 0, 0, 40), w_offset=0, h_offset=0)
-            popMatrix()
-            
-    # Draw all the circles next
-    for ix, x in enumerate(grid_x):
-        for iy, y in enumerate(grid_y):
-            ellipse_values = (x, y, r, r)
-            noStroke()
-            
-            c = random_list_value(pal)
-            fill(*c)
-            
-            # if random_list_value([True, False]):
-            #     c = random_list_value(pal)
-            #     fill(*c)
-            # else:
-            #     fill(*pal[0])
+    for ix, r in enumerate([150, 200, 250, 300, 350, 400, 450]):
+        c = pal[ix]
+        draw_shadow((0, 0, 0, 30), (w/2, h/2, r, r))
+        draw_shape(c, (w/2-5, h/2-5, r+10, r+10))
+        prev_c = c
         
-            pushMatrix()
-            z = random(-5, r*0.3)
-            translate(0, 0, z)
-            if (ix!=x_skip) or (iy!=y_skip):
-                ellipse(*ellipse_values)
-            #ellipse(*ellipse_values)
-            popMatrix()
-        
-    save_frame_timestamp('ellipse', timestamp)
+    save_frame_timestamp('hole', timestamp)
 
-
+def draw_shadow(prev_color, next_shape_vals):
+    v = next_shape_vals
+    img = createGraphics(w, h)
+    img.beginDraw()
+    img.colorMode(HSB, 360, 100, 100, 100)
+    img.background(*prev_color)
+    img.blendMode(REPLACE)
+    img.fill(0, 0, 100, 0)
+    img.noStroke()
+    img.ellipse(v[0], v[1], v[2], v[3])
+    img.blendMode(BLEND)
+    img.endDraw()
+    image(img, 0, 0)
+    
+def draw_shape(this_color, next_shape_vals):
+    v = next_shape_vals
+    img = createGraphics(w, h)
+    img.beginDraw()
+    img.colorMode(HSB, 360, 100, 100, 100)
+    img.fill(*this_color)
+    img.rect(0, 0, w, h)
+    img.blendMode(REPLACE)
+    img.fill(0, 0, 100, 0)
+    img.noStroke()
+    img.ellipse(v[0], v[1], v[2], v[3])
+    img.blendMode(BLEND)
+    img.endDraw()
+    image(img, 0, 0)
+    
 def shadow_ellipse(values_tuple, colors_tuple=(0, 0, 0, 80), w_offset=10, h_offset=20, blur=15):
     x_shape = values_tuple[0]
     y_shape = values_tuple[1]

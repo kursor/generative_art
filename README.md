@@ -1,15 +1,15 @@
+## Hole ([source](https://github.com/aaronpenne/generative_art/tree/master/processing_python/hole))
+
+
+<p align="center"><img src="https://github.com/aaronpenne/generative_art/blob/master/processing_python/hole/images/hole_on_the_move.gif" alt="hole_gif" width="70%"></p>
+
+
 ## Circles with shadows ([source](https://github.com/aaronpenne/generative_art/tree/master/processing_python/circle_shadows_3d))
 
 <p align="center"><img src="https://github.com/aaronpenne/generative_art/blob/master/processing_python/circle_shadows_3d/images/wallpaper_big_calm.png" alt="wallpaper" width="90%"></p>
 
 
 <p align="center"><img src="https://github.com/aaronpenne/generative_art/blob/master/processing_python/circle_shadows_3d/images/red_circles_b.png" alt="red_squares" width="60%"></p>
-
-<p align="center"><img src="https://github.com/aaronpenne/generative_art/blob/master/processing_python/circle_shadows_3d/images/white_circles_c.png" alt="white_squares" width="60%"></p>
-
-Here's an animation showing the process it took to get from a single circle to something interesting. Lots of "figuring out" going on here.
-
-<p align="center"><img src="https://github.com/aaronpenne/generative_art/blob/master/processing_python/circle_shadows_3d/images/circle_shadows_process.gif" alt="circle_process" width="60%"></p>
 
 ## Font Fingerprints Square with Webdings
 
@@ -46,11 +46,6 @@ Here's an animation showing the process it took to get from a single circle to s
 ## Trying to make blurry circles
 
 <p align="center"><img src="https://github.com/aaronpenne/generative_art/blob/master/processing_python/blur_circles/images/dev_blur_circles_037.png" alt="blurry_circles" width="60%"></p>
-
-Here's an animation showing the process. This was a quick 30 minute session to try and create some combo of blurry circles (the image above). There were a few speedbumps that are shown in this clip that got fixed along the way: switching from random() to randomGaussian(), keeping x/y radii consistent, typos, etc. Also wanted to see if dots or full circles looked better. This is a work in progress, it's just fun to show the actual process of working through this stuff.
-
-<p align="center"><img src="https://github.com/aaronpenne/generative_art/blob/master/processing_python/blur_circles/images/output.gif" alt="blurry_circles_gif" width="60%"></p>
-
 
 ## Recreating the style of [Felipe Pantone's Chromadynamica series](https://www.instagram.com/felipepantone/)
 

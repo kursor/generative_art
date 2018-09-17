@@ -19,7 +19,7 @@
 
 <p align="center"><img src="https://github.com/aaronpenne/generative_art/blob/master/processing_python/font_fingerprints/curated_mac/20180907_092520_CourierNewPSMT.png" alt="courier" width="60%"></p>
 
-<p align="center"><img src="https://github.com/aaronpenne/generative_art/blob/master/processing_python/font_fingerprints/curated_mac/20180907_092520_Webdings.png" alt="webdings" width="60%"></p>
+<p align="center"><img src="https://github./master/processing_python/font_fingerprints/curated_mac/20180907_092520_Webdings.png" alt="webdings" width
 
 <p align="center"><img src="https://github.com/aaronpenne/generative_art/blob/master/processing_python/font_fingerprints/curated_mac/20180907_092520_Krungthep.png" alt="krungthep" width="60%"></p>
 

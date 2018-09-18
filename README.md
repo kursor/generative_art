@@ -1,25 +1,30 @@
-## Hole ([source](https://github.com/aaronpenne/generative_art/tree/master/processing_python/hole))
+## Yarn balls 
 
+<p align="center"><img src="https://github.com/aaronpenne/generative_art/blob/master/processing_python/bezier_test/images/20180918_123618_bezier_test_0001.png" alt="scribbles" width="70%"></p>
+
+<p align="center"><img src="https://github.com/aaronpenne/generative_art/blob/master/processing_python/bezier_test/images/20180918_122029_bezier_test_0001.png" alt="scribbles_more" width="70%"></p>
+
+
+## Hole ([source](https://github.com/aaronpenne/generative_art/tree/master/processing_python/hole))
 
 <p align="center"><img src="https://github.com/aaronpenne/generative_art/blob/master/processing_python/hole/images/hole_on_the_move.gif" alt="hole_gif" width="70%"></p>
 
 
 ## Dots ([source](https://github.com/aaronpenne/generative_art/tree/master/processing_python/dots))
 
-<p align="center"><img src="https://github.com/aaronpenne/generative_art/blob/master/processing_python/dots/images/wallpaper_big_calm.png" alt="wallpaper" width="90%"></p>
-
-
 <p align="center"><img src="https://github.com/aaronpenne/generative_art/blob/master/processing_python/dots/images/red_circles_b.png" alt="red_squares" width="60%"></p>
+
+<p align="center"><img src="https://github.com/aaronpenne/generative_art/blob/master/processing_python/dots/images/wallpaper_big_calm.png" alt="wallpaper" width="100%"></p>
+
 
 ## Font Fingerprints Square with Webdings
 
 <p align="center"><img src="https://github.com/aaronpenne/generative_art/blob/master/processing_python/font_fingerprints_square/curated/wallpaper_Webdings.png" alt="fingerprint_square" width="100%"></p>
 
+
 ## Font Fingerprints ([source](https://github.com/aaronpenne/generative_art/tree/master/processing_python/font_fingerprints))
 
 <p align="center"><img src="https://github.com/aaronpenne/generative_art/blob/master/processing_python/font_fingerprints/curated_mac/20180907_092520_CourierNewPSMT.png" alt="courier" width="60%"></p>
-
-<p align="center"><img src="https://github./master/processing_python/font_fingerprints/curated_mac/20180907_092520_Webdings.png" alt="webdings" width
 
 <p align="center"><img src="https://github.com/aaronpenne/generative_art/blob/master/processing_python/font_fingerprints/curated_mac/20180907_092520_Krungthep.png" alt="krungthep" width="60%"></p>
 

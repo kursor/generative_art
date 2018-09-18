@@ -1,4 +1,4 @@
-## Yarn balls 
+## Yarn balls ([source](https://github.com/aaronpenne/generative_art/tree/master/processing_python/bezier_test))
 
 <p align="center"><img src="https://github.com/aaronpenne/generative_art/blob/master/processing_python/bezier_test/images/20180918_123618_bezier_test_0001.png" alt="scribbles" width="70%"></p>
 

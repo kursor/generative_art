@@ -18,10 +18,10 @@ from random import shuffle, seed
 timestamp = datetime.datetime.now().strftime('%Y%m%d_%H%M%S')
 
 # Set random seed value for both Python 'random' and Processing 'random'
-rand_seed = 1138
+rand_seed = 79117
 # Comment out seeds below to get new shape on every run
-#seed(rand_seed) # This only applys to the Python random functions
-#randomSeed(rand_seed) # This only applys to the Processing random functions
+seed(rand_seed) # This only applys to the Python random functions
+randomSeed(rand_seed) # This only applys to the Processing random functions
 
 # Parameters for draw speed
 frame_rate = 10
@@ -35,14 +35,14 @@ len_anchors = 0
 ################################################################################
 
 # Zenburn color palette
-pal = [(60, 7, 86),   #dcdccc cream
-       (0, 28, 80),   #cc9393 pink
-       (180, 9, 69),  #9fafaf blue gray
-       (0, 13, 74),   #bca3a3 mauve
-       (24, 31, 100), #ffcfaf peach
-       (150, 22, 56), #709080 green
-       #(0, 0, 100),
-      ]
+# pal = [(60, 7, 86),   #dcdccc cream
+#        (0, 28, 80),   #cc9393 pink
+#        (180, 9, 69),  #9fafaf blue gray
+#        (0, 13, 74),   #bca3a3 mauve
+#        (24, 31, 100), #ffcfaf peach
+#        (150, 22, 56), #709080 green
+#        #(0, 0, 100),
+#       ]
 
 # Warhol's Mick Jagger
 # pal = [(41, 41, 66),  # brown
@@ -51,6 +51,13 @@ pal = [(60, 7, 86),   #dcdccc cream
 #        (354, 60, 72), # red
 #        (98, 19, 87),  # green
 #       ]
+
+pal = [(348.7, 50.4, 94.9),  # bright salmon
+       (306.6, 40.8, 96.1), # bright pink
+       (45.7, 78.8, 94.1),  # yellow
+       (16.3, 28.6, 96.1),  # salmon
+       (358.7, 75.6, 94.9), # red
+       ]
 
 # Counter to allow for tracking draw() runs
 count = 0
@@ -61,21 +68,21 @@ count = 0
 ################################################################################
 
 # Canvas size
-w = 1000  # width
-h = 1000  # height
+w = 4000  # width
+h = 4000  # height
 
 # Number of positions across canvas
 step = 10
 
 # Number of points around individual circle
-num_anchors = 5
+num_anchors = 4
 
 # Radius of individual circle
-r_mult = 0.8  # Decimal multiplier is pct of space to fill
+r_mult = 0.75  # Decimal multiplier is pct of space to fill
 radius = w/(2*step) * r_mult 
 
 # Size of lines
-stroke_weight = 1
+stroke_weight = 4
 
 # Size of empty space between edge and piece
 w_pad = 2
@@ -121,7 +128,7 @@ def draw():
         sys.exit(0)
     count += 1
 
-    background(0, 0, 25)
+    background(0, 0, 97)
 
     # Moves origin to center of image so (0,0) becomes center instead of (w/2,h/2)
     # translate(w/2, h/2)
@@ -138,14 +145,17 @@ def draw():
             # noFill()
             fill(*random_list_value(pal))
             
-            noStroke()
-            #stroke(0, 0, 25)
+            #noStroke()
+            stroke(0, 0, 25)
             #stroke(*pal[0])
             strokeWeight(stroke_weight)
             
             draw_yarn_ball(i*w_step, j*h_step, radius)
 
     save_frame_timestamp('yarn', timestamp)
+    
+    # Save memory by closing image, just look at it in the file system
+    exit()
 
 
 ################################################################################

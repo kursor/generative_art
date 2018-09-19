@@ -23,16 +23,16 @@ rand_seed = 1138
 #seed(rand_seed) # This only applys to the Python random functions
 #randomSeed(rand_seed) # This only applys to the Processing random functions
 
-# Parameters for canvas and draw speed
+# Parameters for draw speed
 frame_rate = 10
-w = 1000  # width
-h = 1000  # height
 
-# Parameters for points around circle
-num_anchors = 50
 # These globals are populated in setup()
 anchors = []
 len_anchors = 0
+
+################################################################################
+# Color palettes #FIXME need a library of these or something...
+################################################################################
 
 # Zenburn color palette
 pal = [(60, 7, 86),   #dcdccc cream
@@ -41,11 +41,45 @@ pal = [(60, 7, 86),   #dcdccc cream
        (0, 13, 74),   #bca3a3 mauve
        (24, 31, 100), #ffcfaf peach
        (150, 22, 56), #709080 green
-       (0, 0, 100),
+       #(0, 0, 100),
       ]
+
+# Warhol's Mick Jagger
+# pal = [(41, 41, 66),  # brown
+#        (342, 32, 85), # pink
+#        #(45, 7, 96),   # cream
+#        (354, 60, 72), # red
+#        (98, 19, 87),  # green
+#       ]
 
 # Counter to allow for tracking draw() runs
 count = 0
+
+
+################################################################################
+# Knobs to turn
+################################################################################
+
+# Canvas size
+w = 1000  # width
+h = 1000  # height
+
+# Number of positions across canvas
+step = 10
+
+# Number of points around individual circle
+num_anchors = 5
+
+# Radius of individual circle
+r_mult = 0.8  # Decimal multiplier is pct of space to fill
+radius = w/(2*step) * r_mult 
+
+# Size of lines
+stroke_weight = 1
+
+# Size of empty space between edge and piece
+w_pad = 2
+h_pad = 2
 
 ################################################################################
 # setup() 
@@ -67,7 +101,7 @@ def setup():
     
     # Determine anchor points around circle for the curves to hit
     global anchors, len_anchors
-    anchors = range_float(0-PI/2, TWO_PI-PI/2, TWO_PI/num_anchors)
+    anchors = range_float(0+PI/2, TWO_PI+PI/2, TWO_PI/num_anchors)
     len_anchors = len(anchors)
 
     # Stops draw() from running in an infinite loop (should be last line)
@@ -87,31 +121,46 @@ def draw():
         sys.exit(0)
     count += 1
 
-    # Parameters for run (knobs to turn)
-    radius = 300
-    
-    # Aesthetics of lines
-    strokeWeight(3)
-    stroke(0, 0, 0)
-    noFill()
-
-    background(0, 0, 90)
+    background(0, 0, 25)
 
     # Moves origin to center of image so (0,0) becomes center instead of (w/2,h/2)
-    translate(w/2, h/2)
+    # translate(w/2, h/2)
         
     ################################################################################
     # Actual shape drawing begins
     ################################################################################
+    w_step = w/step
+    h_step = h/step
     
+    for i in range(w_pad,step-w_pad+1):
+        for j in range(h_pad,step-h_pad+1):
+            # Aesthetics of lines
+            # noFill()
+            fill(*random_list_value(pal))
+            
+            noStroke()
+            #stroke(0, 0, 25)
+            #stroke(*pal[0])
+            strokeWeight(stroke_weight)
+            
+            draw_yarn_ball(i*w_step, j*h_step, radius)
+
+    save_frame_timestamp('yarn', timestamp)
+
+
+################################################################################
+# Functions
+################################################################################
+
+def draw_yarn_ball(x_center, y_center, radius):
     # Get three start/end points. The curve needs to retrace these 3 points to connect in a smooth loop 
     # https://forum.processing.org/two/discussion/14849/how-to-form-a-smooth-loop-using-curve
     beginShape()
-    x_0, y_0 = circle_points(0, 0, radius, random_list_value(anchors))
+    x_0, y_0 = circle_points(x_center, y_center, radius, random_list_value(anchors))
     curveVertex(x_0, y_0)
-    x_1, y_1 = circle_points(0, 0, radius, random_list_value(anchors))
+    x_1, y_1 = circle_points(x_center, y_center, radius, random_list_value(anchors))
     curveVertex(x_1, y_1)
-    x_2, y_2 = circle_points(0, 0, radius, random_list_value(anchors))
+    x_2, y_2 = circle_points(x_center, y_center, radius, random_list_value(anchors))
     curveVertex(x_2, y_2)
 
     # Shuffle the list to allow for randomized points around the circle
@@ -120,7 +169,7 @@ def draw():
     # Loop through list of anchor points and draw curves between them (best if shuffled first)
     for a in anchors:
         # radius = random_centered(radius, 30) # Randomize the radius a bit for each point
-        x, y = circle_points(0, 0, radius, a)
+        x, y = circle_points(x_center, y_center, radius, a)
         curveVertex(x, y)
         
         # Loop through all the points again for a weird effect
@@ -134,13 +183,7 @@ def draw():
     curveVertex(x_1, y_1)
     curveVertex(x_2, y_2)
     endShape()
-    
-    save_frame_timestamp('bezier_test', timestamp)
 
-
-################################################################################
-# Functions
-################################################################################
 
 def save_frame_timestamp(filename, timestamp='', output_dir='output'):
     '''Saves each frame with a structured filename to allow for tracking all output'''

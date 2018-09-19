@@ -7,7 +7,7 @@
 
 ## Hole ([source](https://github.com/aaronpenne/generative_art/tree/master/hole))
 
-<p align="center"><img src="https://github.com/aaronpenne/generative_art/blob/master/hole/images/hole_on_the_move.gif" alt="hole_gif" width="70%"></p>
+<p align="center"><img src="https://github.com/aaronpenne/generative_art/blob/master/hole/images/20180912_181206_hole_001.png" alt="hole" width="70%"></p>
 
 
 ## Dots ([source](https://github.com/aaronpenne/generative_art/tree/master/dots))

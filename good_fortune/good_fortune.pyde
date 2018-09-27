@@ -68,21 +68,21 @@ count = 0
 ################################################################################
 
 # Canvas size
-w = 1000  # width
-h = 1000  # height
+w = 4000  # width
+h = 4000  # height
 
 # Number of positions across canvas
-step = 5
+step = 10
 
 # Number of points around individual circle
-num_anchors = 15
+num_anchors = 4
 
 # Radius of individual circle
 r_mult = 0.75  # Decimal multiplier is pct of space to fill
 radius = w/(2*step) * r_mult 
 
 # Size of lines
-stroke_weight = 1
+stroke_weight = 4
 
 # Size of empty space between edge and piece
 w_pad = 2
@@ -139,34 +139,19 @@ def draw():
     w_step = w/step
     h_step = h/step
     
-    # for i in range(w_pad,step-w_pad+1):
-        
-    #     for k in range(30):
-    #         beginShape()
-    #         for j in range(h_pad,step-h_pad+1):
-    #             # Aesthetics of lines
-    #             #noFill()
-    #             fill(16.3, 28.6, 96.1, 4)
-                
-    #             noStroke()
-    #             #stroke(0, 0, 25)
-    #             #stroke(*pal[0])
-    #             strokeWeight(stroke_weight)
-                
-    #             draw_yarn_ball(i*w_step, j*h_step, radius)
-    #         endShape()
+    for i in range(w_pad,step-w_pad+1):
+        for j in range(h_pad,step-h_pad+1):
+            # Aesthetics of lines
+            # noFill()
+            fill(*random_list_value(pal))
             
-    noStroke()
-    fill(16.3, 28.6, 96.1, 4)
-    
-    for j in range(10):
-        x = random(0, w)
-        y = random(0, h)
-        for i in range(10):
-            beginShape()
-            draw_yarn_ball(x, y, w/2*0.7)
-            endShape()
-    
+            #noStroke()
+            stroke(0, 0, 25)
+            #stroke(*pal[0])
+            strokeWeight(stroke_weight)
+            
+            draw_yarn_ball(i*w_step, j*h_step, radius)
+
     save_frame_timestamp('yarn', timestamp)
     
     # Save memory by closing image, just look at it in the file system
@@ -181,6 +166,7 @@ def draw():
 def draw_yarn_ball(x_center, y_center, radius):
     # Get three start/end points. The curve needs to retrace these 3 points to connect in a smooth loop 
     # https://forum.processing.org/two/discussion/14849/how-to-form-a-smooth-loop-using-curve
+    beginShape()
     x_0, y_0 = circle_points(x_center, y_center, radius, random_list_value(anchors))
     curveVertex(x_0, y_0)
     x_1, y_1 = circle_points(x_center, y_center, radius, random_list_value(anchors))
@@ -207,6 +193,7 @@ def draw_yarn_ball(x_center, y_center, radius):
     curveVertex(x_0, y_0)
     curveVertex(x_1, y_1)
     curveVertex(x_2, y_2)
+    endShape()
 
 
 def save_frame_timestamp(filename, timestamp='', output_dir='output'):

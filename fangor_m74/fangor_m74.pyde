@@ -169,7 +169,7 @@ def draw():
     filename = create_filename('test')
     saveFrame('output/blur_circles_######.png')
     #print('concentric_{:02}_{:02}_{:01}.png'.format(num_circles, num_cols, int(xy_noise*10)))
-
+    exit()
 def random_list_value(val_list):
     index = int(random(0, len(val_list)))
     value = val_list[index]

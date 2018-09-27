@@ -14,11 +14,17 @@ from random import shuffle, seed
 # Global variables
 ################################################################################
 
+customer_name = ''
+
+def rand_seed_string(name):
+    sig_stamp_list = [ord(x) for x in name]
+    return sum(sig_stamp_list)
+
 # Get time 
 timestamp = datetime.datetime.now().strftime('%Y%m%d_%H%M%S')
 
 # Set random seed value for both Python 'random' and Processing 'random'
-rand_seed = 1171989
+rand_seed = rand_seed_string(customer_name)
 # Comment out seeds below to get new shape on every run
 seed(rand_seed) # This only applys to the Python random functions
 randomSeed(rand_seed) # This only applys to the Processing random functions
@@ -75,7 +81,7 @@ h = 1000  # height
 step = 5
 
 # Number of points around individual circle
-num_anchors = 15
+num_anchors = 42
 
 # Radius of individual circle
 r_mult = 0.75  # Decimal multiplier is pct of space to fill
@@ -128,17 +134,13 @@ def draw():
         sys.exit(0)
     count += 1
 
-    background(0, 0, 100)
-
     # Moves origin to center of image so (0,0) becomes center instead of (w/2,h/2)
     # translate(w/2, h/2)
         
     ################################################################################
     # Actual shape drawing begins
     ################################################################################
-    w_step = w/step
-    h_step = h/step
-    
+
     # for i in range(w_pad,step-w_pad+1):
         
     #     for k in range(30):
@@ -155,17 +157,23 @@ def draw():
                 
     #             draw_yarn_ball(i*w_step, j*h_step, radius)
     #         endShape()
-            
-    noStroke()
-    fill(16.3, 28.6, 96.1, 4)
+        
+    background(0, 0, 90)
+        
+    strokeWeight(2)
+    stroke(0, 0, 25)
+    noFill()
+
+    beginShape()
+    draw_yarn_ball(w/2, h/2.3, w*0.6/2)
+    endShape()
     
-    for j in range(10):
-        x = random(0, w)
-        y = random(0, h)
-        for i in range(10):
-            beginShape()
-            draw_yarn_ball(x, y, w/2*0.7)
-            endShape()
+    fill(0, 0, 25)
+    text_font = createFont('LucidaSans-Typewriter', 20)
+    textFont(text_font)
+    textAlign(CENTER, CENTER)
+    textSize(20)
+    text("rand_seed_string('{}')".format(customer_name.lower()), w/2, h*0.87)
     
     save_frame_timestamp('yarn', timestamp)
     

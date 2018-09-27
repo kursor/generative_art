@@ -1,3 +1,7 @@
+## Good Fortune ([source](https://github.com/aaronpenne/generative_art/tree/master/yarn))
+
+<p align="center"><img src="https://github.com/aaronpenne/generative_art/blob/master/yarn/images/yarn_pack_kbo_a.png" alt="kbo_a" width="70%"></p>
+
 ## Yarn ([source](https://github.com/aaronpenne/generative_art/tree/master/yarn))
 
 <p align="center"><img src="https://github.com/aaronpenne/generative_art/blob/master/yarn/images/yarn_reg_d.png" alt="scribbles" width="70%"></p>

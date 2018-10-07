@@ -165,6 +165,7 @@ def draw():
     draw_yarn_ball(w/2, h/2.3, w*0.6/2)
     endShape()
     
+    
     fill(0, 0, 25)
     text_font = createFont('LucidaSans-Typewriter', 20)
     textFont(text_font)

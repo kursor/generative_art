@@ -75,7 +75,13 @@ num_steps = w/radius
 locs_a = [x for x in range(0, num_steps+1, 2)]
 locs_b = [x for x in range(1, num_steps+1, 2)]
 
+offset_a = [random(0, 3*h/10) for x in locs_a]
+offset_b = [random(0, 1.5*h/10) for x in locs_a]
+
 color_line = 4*h/10
+
+sin_steps = []
+print(sin_steps)
 
 ################################################################################
 # setup()
@@ -96,9 +102,15 @@ def setup():
     frameRate(frame_rate)
 
     rectMode(CORNERS)
+    
+    global sin_steps
+    sin_steps = [1+sin(x) for x in range_float(0, TWO_PI+PI/10, PI/10)]
+    sin_steps = sin_steps + sin_steps + sin_steps + sin_steps + sin_steps
+    print(sin_steps)
+    
 
     # Stops draw() from running in an infinite loop (should be last line)
-    noLoop()  # Comment to run draw() infinitely (or until 'count' hits limit)
+    #noLoop()  # Comment to run draw() infinitely (or until 'count' hits limit)
 
 
 ################################################################################
@@ -107,6 +119,9 @@ def setup():
 ################################################################################
 
 def draw():
+    global count
+    count += 1
+    
     background(0, 0, 90)
 
     noStroke()
@@ -117,18 +132,16 @@ def draw():
     fill(0, 0, 100)
     rect(0, h, w, color_line)
 
-
-    for loc in locs_a:
+    for loc, offset in zip(locs_a, offset_a):
         fill(0, 0, 0)
         #offset = abs(sin(loc))*100
-        offset = random(0, 3*h/10)
         x = loc*radius
-        y = color_line+offset
+        y = color_line+offset+offset/4*sin_steps[count]
         rect(x-radius/2, y, x+radius/2, 0)
         ellipse(x, y, radius, radius)
-    for loc in locs_b:
+    for loc, offset in zip(locs_b, offset_b):
         fill(0, 0, 100)
-        offset = random(0, 1.5*h/10)
+        #offset = random(0, 1.5*h/10)
         x = loc*radius
         y = color_line-offset
         rect(x-radius/2, y, x+radius/2, h)

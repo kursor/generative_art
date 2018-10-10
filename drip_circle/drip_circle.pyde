@@ -121,7 +121,7 @@ def draw():
     for loc in locs_a:
         fill(0, 0, 0)
         #offset = abs(sin(loc))*100
-        offset = random(0, 1.5*h/10)
+        offset = random(0, 3*h/10)
         x = loc*radius
         y = color_line+offset
         rect(x-radius/2, y, x+radius/2, 0)

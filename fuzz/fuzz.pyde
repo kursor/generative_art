@@ -62,7 +62,7 @@ def setup():
     background(0, 0, 100)
     
     # Stops draw() from running in an infinite loop (should be last line)
-    #noLoop()  # Comment to run draw() infinitely (or until 'count' hits limit)
+    noLoop()  # Comment to run draw() infinitely (or until 'count' hits limit)
 
 
 ################################################################################

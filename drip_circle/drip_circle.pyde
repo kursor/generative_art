@@ -65,11 +65,11 @@ count = 0
 ################################################################################
 
 # Canvas size
-w = 1000  # width
-h = 1000  # height
+w = 500  # width
+h = 500  # height
 
 # Number of positions across canvas
-radius = 50
+radius = 26
 
 num_steps = w/radius
 locs_a = [x for x in range(0, num_steps+1, 2)]
@@ -104,8 +104,8 @@ def setup():
     rectMode(CORNERS)
     
     global sin_steps
-    sin_steps = [1+sin(x) for x in range_float(0, TWO_PI+PI/10, PI/10)]
-    sin_steps = sin_steps + sin_steps + sin_steps + sin_steps + sin_steps
+    sin_steps = [1+sin(x) for x in range_float(0, TWO_PI+PI/20, PI/20)]
+    sin_steps = sin_steps + sin_steps + sin_steps + sin_steps
     print(sin_steps)
     
 
@@ -136,14 +136,14 @@ def draw():
         fill(0, 0, 0)
         #offset = abs(sin(loc))*100
         x = loc*radius
-        y = color_line+offset+offset/4*sin_steps[count]
+        y = color_line+offset+offset/4*sin_steps[count+loc]
         rect(x-radius/2, y, x+radius/2, 0)
         ellipse(x, y, radius, radius)
     for loc, offset in zip(locs_b, offset_b):
         fill(0, 0, 100)
         #offset = random(0, 1.5*h/10)
         x = loc*radius
-        y = color_line-offset
+        y = color_line-offset+offset/10*sin_steps[count+loc+10]
         rect(x-radius/2, y, x+radius/2, h)
         ellipse(x, y, radius, radius)
 

@@ -47,7 +47,7 @@
 <p align="center"><img src="https://github.com/aaronpenne/generative_art/blob/master/fangor_m74/images/fangor_wannabe.png" alt="fangor_wannabe" width="60%"></p>
 
 
-## Random iterations in the Fangor style ([source](https://github.com/aaronpenne/generative_art/tree/master/a_fangor_iterative))
+## Random iterations in the Fangor style ([source](https://github.com/aaronpenne/generative_art/tree/master/fangor_iterative))
 
 <p align="center"><img src="https://github.com/aaronpenne/generative_art/blob/master/fangor_iterative/images/screenshot.png" alt="fangor_wannabe" width="80%"></p>
 

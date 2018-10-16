@@ -32,18 +32,10 @@ frame_rate = 30
 w = 1000  # width
 h = 1000  # height
 
-opacity = 3
 
-divisions = 6
 
-a_step = PI/100
-angles_1 = helper.range_float(0, 3*(TWO_PI+a_step), a_step)
-angles_2 = helper.range_float(0+TWO_PI/3, 3*(TWO_PI+TWO_PI/3+a_step), a_step)
-angles_3 = helper.range_float(0+2*TWO_PI/3, 3*(TWO_PI+2*TWO_PI/3+a_step), a_step)
-
-angles_1 = [random(x, x+a_step) for x in angles_1]
-angles_2 = [random(x, x+a_step) for x in angles_2]
-angles_3 = [random(x, x+a_step) for x in angles_3]
+a_step = PI/400
+angles = helper.range_float(0, TWO_PI+a_step, a_step)
 
 ################################################################################
 # setup()
@@ -76,23 +68,31 @@ def setup():
 
 def draw():
     
-    count = (frameCount)
-    background(0, 0, 20)
     
-    directionalLight(0, 0, 95, 0, 0, -10)
-    ambientLight(0, 0, 50)
+    # if frameCount == len(angles):
+    #     sys.exit()
+    count = (frameCount) % len(angles)
+        
+    camera_x, camera_y = helper.circle_points(w/2, h/2, 400, angles[count])
+    camera(camera_x, camera_y, camera_x*1.5, camera_x, camera_y, 0, 0, 1, 0)
+        
+    
+    background(0, 0, 0)
+    
+    # directionalLight(0, 0, 95, 0, 0, -10)
+    # ambientLight(0, 0, 50)
     
     stroke(0, 0, 20)
     fill_dark = 107
     translate(-500, -500, 950)
-    for z in range(0, 10):
-        fill_dark -= 9
+    for z in range(0, 13):
+        fill_dark -= 8
         fill(0, 0, fill_dark)
         translate(0, 0, -500)
-        for x in range(-3*w, 2*w, 300):
-            for y in range(-3*h, 2*h, 300):
+        for x in range(-3*w, 4*w, 300):
+            for y in range(-3*h, 4*h, 300):
                 # Circles
-                ellipse(x+count, y+count, 30, 30)
+                ellipse(x, y, 30, 30)
                 
                 # Spheres
                 # pushMatrix()
@@ -113,4 +113,4 @@ def draw():
 ################################################################################
 
 def mousePressed():
-    helper.save_frame_timestamp('fuzz', timestamp, random_seed)
+    helper.save_frame_timestamp('grid_lights', timestamp, random_seed)

@@ -52,7 +52,7 @@ angles_3 = [random(x, x+a_step) for x in angles_3]
 
 def setup():
     # Sets size of canvas in pixels (must be first line)
-    size(w, h)
+    size(w, h, P3D)
 
     # Sets resolution dynamically (affects resolution of saved image)
     pixelDensity(displayDensity())  # 1 for low, 2 for high
@@ -75,40 +75,33 @@ def setup():
 ################################################################################
 
 def draw():
-    stroke(60, 7, 86, opacity)
-    a = angles_1[frameCount]
-    #stroke(180, 100, 100, opacity) # cyan
-    #stroke(16.3, 28.6, 96.1) # salmon
-    x_circle, y_circle = helper.circle_points(w/2, h/2, 100, a)
-    for row in range(1, divisions):
-        for col in range(1, divisions):
-            x = col * w/divisions
-            y = row * h/divisions
-            line(x, y, x_circle, y_circle)
+    
+    count = (frameCount)
+    background(0, 0, 20)
+    
+    directionalLight(0, 0, 95, 0, 0, -10)
+    ambientLight(0, 0, 50)
+    
+    stroke(0, 0, 20)
+    fill_dark = 107
+    translate(-500, -500, 950)
+    for z in range(0, 10):
+        fill_dark -= 9
+        fill(0, 0, fill_dark)
+        translate(0, 0, -500)
+        for x in range(-3*w, 2*w, 300):
+            for y in range(-3*h, 2*h, 300):
+                # Circles
+                ellipse(x+count, y+count, 30, 30)
+                
+                # Spheres
+                # pushMatrix()
+                # translate(x+count, y+count)
+                # sphere(30)
+                # popMatrix()
         
-    stroke(60, 7, 86, opacity)
-    a = angles_2[frameCount]
-    #stroke(300, 100, 100, opacity) # magenta
-    #stroke(348.7, 50.4, 94.9) # bright salmon
-    x_circle, y_circle = helper.circle_points(w/2, h/2, 100, a)
-    for row in range(1, divisions):
-        for col in range(1, divisions):
-            x = col * w/divisions
-            y = row * h/divisions
-            line(x, y, x_circle, y_circle)
             
-    stroke(60, 7, 86, opacity)
-    a = angles_3[frameCount]
-    #stroke(60, 100, 100, opacity) # yellow
-    #stroke(45.7, 78.8, 94.1) # yellow
-    x_circle, y_circle = helper.circle_points(w/2, h/2, 100, a)
-    for row in range(1, divisions):
-        for col in range(1, divisions):
-            x = col * w/divisions
-            y = row * h/divisions
-            line(x, y, x_circle, y_circle)
-            
-    #helper.save_frame_timestamp('fuzz', timestamp, random_seed)
+    #helper.save_frame_timestamp('grid_lights', timestamp, random_seed)
 
     # Save memory by closing image, just look at it in the file system
     # if (w > 1000) or (h > 1000):

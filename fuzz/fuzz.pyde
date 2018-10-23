@@ -75,38 +75,73 @@ def setup():
 ################################################################################
 
 def draw():
-    stroke(60, 7, 86, opacity)
+    noFill()
+    
+    background(0, 0, 25)
+    
+    stroke(342, 32, 85)
     a = angles_1[frameCount]
     #stroke(180, 100, 100, opacity) # cyan
     #stroke(16.3, 28.6, 96.1) # salmon
     x_circle, y_circle = helper.circle_points(w/2, h/2, 100, a)
     for row in range(1, divisions):
         for col in range(1, divisions):
+            strokeWeight(random(1, 5))
             x = col * w/divisions
             y = row * h/divisions
-            line(x, y, x_circle, y_circle)
-        
-    stroke(60, 7, 86, opacity)
-    a = angles_2[frameCount]
-    #stroke(300, 100, 100, opacity) # magenta
-    #stroke(348.7, 50.4, 94.9) # bright salmon
-    x_circle, y_circle = helper.circle_points(w/2, h/2, 100, a)
-    for row in range(1, divisions):
-        for col in range(1, divisions):
-            x = col * w/divisions
-            y = row * h/divisions
-            line(x, y, x_circle, y_circle)
+            beginShape()
+            curveVertex(x, y) 
+            curveVertex(x, y)
+            for idx in range(3):
+                x_rand = random(x, x_circle)
+                y_rand = random(y, y_circle)
+                curveVertex(x_rand, y_rand)
+            curveVertex(x_circle, y_circle)
+            curveVertex(x_circle, y_circle)
+            endShape()
             
-    stroke(60, 7, 86, opacity)
-    a = angles_3[frameCount]
-    #stroke(60, 100, 100, opacity) # yellow
-    #stroke(45.7, 78.8, 94.1) # yellow
+    stroke(41, 41, 66)
+    a = angles_2[frameCount]
+    #stroke(180, 100, 100, opacity) # cyan
+    #stroke(16.3, 28.6, 96.1) # salmon
     x_circle, y_circle = helper.circle_points(w/2, h/2, 100, a)
     for row in range(1, divisions):
         for col in range(1, divisions):
+            strokeWeight(random(1, 5))
             x = col * w/divisions
             y = row * h/divisions
-            line(x, y, x_circle, y_circle)
+            beginShape()
+            curveVertex(x, y)
+            curveVertex(x, y)
+            for idx in range(3):
+                x_rand = random(x, x_circle)
+                y_rand = random(y, y_circle)
+                curveVertex(x_rand, y_rand)
+            curveVertex(x_circle, y_circle)
+            curveVertex(x_circle, y_circle)
+            endShape()
+        
+    stroke(98, 19, 87)    
+    a = angles_3[frameCount]
+    #stroke(180, 100, 100, opacity) # cyan
+    #stroke(16.3, 28.6, 96.1) # salmon
+    x_circle, y_circle = helper.circle_points(w/2, h/2, 100, a)
+    for row in range(1, divisions):
+        for col in range(1, divisions):
+            strokeWeight(random(1, 5))
+            x = col * w/divisions
+            y = row * h/divisions
+            beginShape()
+            curveVertex(x, y)
+            curveVertex(x, y)
+            for idx in range(3):
+                x_rand = random(x, x_circle)
+                y_rand = random(y, y_circle)
+                curveVertex(x_rand, y_rand)
+            curveVertex(x_circle, y_circle)
+            curveVertex(x_circle, y_circle)
+            endShape()
+            
             
     #helper.save_frame_timestamp('fuzz', timestamp, random_seed)
 

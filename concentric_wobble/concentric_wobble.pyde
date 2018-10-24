@@ -15,6 +15,7 @@ import helper
 ################################################################################
 
 random_seed = int(random(0, 10000))
+random_seed = 1138
 random_seed = helper.get_seed(random_seed)
 helper.set_seed(random_seed)
 
@@ -34,20 +35,20 @@ h = 1000  # height
 
 opacity = 3
 
-divisions = 6
+divisions = 10
 
-a_step = PI/11
+a_step = PI/divisions
 angles_1 = helper.range_float(0, TWO_PI, a_step)
-a_step = PI/11
+a_step = PI/divisions
 angles_2 = helper.range_float(0+TWO_PI/3, TWO_PI+TWO_PI/3, a_step)
-a_step = PI/11
+a_step = PI/divisions
 angles_3 = helper.range_float(0+2*TWO_PI/3, TWO_PI+2*TWO_PI/3, a_step)
 
-offset = w*.02
+offset = w*.005
 offset_1 = [random(-offset, offset) for x in angles_1]
-offset = w*.01 
+offset = w*.005 
 offset_2 = [random(-offset, offset) for x in angles_2]
-offset = w*.01 
+offset = w*.005 
 offset_3 = [random(-offset, offset) for x in angles_3]
 
 ################################################################################
@@ -80,9 +81,9 @@ def setup():
 ################################################################################
 
 def draw():
-    step = 100
-    if frameCount == step*2:
-        exit()
+    step = 20
+    # if frameCount == step*2:
+    #     exit()
     
     counter = frameCount * PI/step
     
@@ -101,13 +102,17 @@ def draw():
     stroke(60, 7, 86)
     angles = [x+counter/2 for x in angles_1]
     offset = [x*sin(counter) for x in offset_1]
-    draw_concentric_wobble(1, 50, int(w*0.4), 0.01, offset, angles_1, w/2, h/2) #1*w/3 
+    draw_concentric_wobble(1, 2, int(w*0.4), 0.01, offset_1, angles_1, w/2, h/2) #1*w/3 
     
     angles = [x+counter/2 for x in angles_2]
     offset = [x*sin(counter) for x in offset_2]
-    draw_concentric_wobble(1, 50, int(w*0.4), 0.01, offset, angles_2, w/2, h/2) #1*w/3 
+    draw_concentric_wobble(1, 2, int(w*0.4), 0.01, offset_2, angles_2, w/2+frameCount, h/2) #1*w/3 
     
-        
+    angles = [x+counter/2 for x in angles_3]
+    offset = [x*sin(counter) for x in offset_3]
+    draw_concentric_wobble(1, 2, int(w*0.4), 0.01, offset_2, angles_2, w/2-frameCount, h/2) #1*w/3 
+       
+       
     #helper.save_frame_timestamp('concentric_wobble', timestamp, random_seed)
 
     # Save memory by closing image, just look at it in the file system
@@ -127,6 +132,7 @@ def draw_concentric_wobble(stroke_weight, r_start, r_end, r_offset, offset_list,
         
     for r in range(r_start, r_end, 3*stroke_weight):
         offset = [r_offset*r*x for x in offset_list]
+        #offset = [x for x in offset_list]
         
         beginShape()
         x_0, y_0 = helper.circle_points(x_center, y_center, r, angles_list[0])

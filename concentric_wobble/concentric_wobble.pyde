@@ -101,15 +101,14 @@ def draw():
     stroke(60, 7, 86)
     angles = [x+counter/2 for x in angles_1]
     offset = [x*sin(counter) for x in offset_1]
-    draw_concentric_wobble(1, 50, int(w*0.4), 0.01, offset, angles, w/2, h/2) #1*w/3 
+    draw_concentric_wobble(1, 50, int(w*0.4), 0.01, offset, angles_1, w/2, h/2) #1*w/3 
     
-    # stroke(60, 7, 86)
-    # angles = [x-counter/2 for x in angles_2]
-    # offset = [x*cos(counter) for x in offset_2]
-    # draw_concentric_wobble(2, 50, int(w*0.4), 0.01, offset, angles, w/2, h/2) # 2*w/3 
+    angles = [x+counter/2 for x in angles_2]
+    offset = [x*sin(counter) for x in offset_2]
+    draw_concentric_wobble(1, 50, int(w*0.4), 0.01, offset, angles_2, w/2, h/2) #1*w/3 
     
         
-    helper.save_frame_timestamp('concentric_wobble', timestamp, random_seed)
+    #helper.save_frame_timestamp('concentric_wobble', timestamp, random_seed)
 
     # Save memory by closing image, just look at it in the file system
     # if (w > 1000) or (h > 1000):

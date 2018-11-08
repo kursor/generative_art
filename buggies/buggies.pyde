@@ -15,7 +15,7 @@ import helper
 ################################################################################
 
 random_seed = int(random(0, 10000))
-random_seed = 7596
+# random_seed = 7596
 random_seed = helper.get_seed(random_seed)
 helper.set_seed(random_seed)
 
@@ -23,7 +23,7 @@ helper.set_seed(random_seed)
 timestamp = datetime.datetime.now().strftime('%Y%m%d_%H%M%S')
 
 # Parameters for draw speed
-frame_rate = 30
+frame_rate = 2
 
 ################################################################################
 # Knobs to turn
@@ -58,7 +58,7 @@ def setup():
     rectMode(CORNER)
     
     # Stops draw() from running in an infinite loop (should be last line)
-    noLoop()  # Comment to run draw() infinitely (or until 'count' hits limit)
+    #noLoop()  # Comment to run draw() infinitely (or until 'count' hits limit)
 
 
 ################################################################################
@@ -155,21 +155,24 @@ def draw_head(x, y, w, h):
     endShape()
     
 def draw_pronotum(x, y, w, h):
+    y_squeeze = y*random(0.01, 0.17)
+    
     fill(0, 0, 50)
     #rect(x, y, w, h)
     beginShape()
     cv_point(x, y)
+    cv_point(x+w/2, y+y_squeeze)
     cv_point(x+w, y)
     cv_point(x+w, y+h)
     cv_point(x, y+h)
     cv_point(x, y)
+    cv_point(x+w/2, y+y_squeeze)
     cv_point(x+w, y)
-    cv_point(x+w, y+h)
     endShape()
     
 def draw_elytron(x, y, w, h):
-    w_squeeze = 50
-    y_squeeze = 50
+    w_squeeze = w*random(0.01, 0.2)
+    y_squeeze = h*random(0.01, 0.4)
     
     fill(0, 0, 70)
     #rect(x, y, w, h)
@@ -186,7 +189,7 @@ def draw_elytron(x, y, w, h):
 
 def cv_point(x, y):
     curveVertex(x, y)
-    ellipse(x, y, 5, 5)
+    #ellipse(x, y, 5, 5)
 
 def mousePressed():
     helper.save_frame_timestamp('buggies', timestamp, random_seed)

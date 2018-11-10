@@ -64,6 +64,18 @@ def setup():
 ################################################################################
 # draw()
 # function gets run repeatedly (unless noLoop() called in setup())
+#
+# 0--1--2--3--4
+# |           |
+# 15          5
+# |           |
+# 14          6
+# |           |
+# 13          7
+# |           |
+# 12-11-10--9-8
+#
+#
 ################################################################################
 
 def draw():
@@ -95,35 +107,106 @@ def draw():
     h_head = random(h_bug*0.1, h_bug*0.2)
 
     # Pronotum
-    x_pronotum = x_0
-    y_pronotum = y_head + h_head
-    w_pronotum = w_bug# * 0.9
-    h_pronotum = random(h_head, h_bug*0.4)
+    y_gap = 20
+    x_pron = x_0
+    y_pron = y_head + h_head + y_gap
+    w_pron = w_bug# * 0.9
+    h_pron = random(h_head, h_bug*0.4)
 
     # Elytron
-    x_elytron = x_0
-    y_elytron = y_pronotum + h_pronotum
-    w_elytron = w_bug# * 0.9
-    h_elytron = h_bug - h_head - h_pronotum
+    y_gap = 20
+    x_elyt = x_0
+    y_elyt = y_pron + h_pron + y_gap
+    w_elyt = w_bug# * 0.9
+    h_elyt = h_bug - h_head - h_pron
     
-    x = x_head+w_head*0.4/2
-    y = y_head
-    w = w_head-w_head*0.4
-    h = h_head
-    draw_head(x, y, w, h)
     
-    x = x_elytron+w_elytron*0.2/2
-    y = y_elytron
-    w = w_elytron-w_elytron*0.2
-    h = h_elytron
-    draw_elytron(x, y, w, h)
+    fill(0, 0, 50)
+    head = get_16_points(x_head, y_head, w_head, h_head)
 
-    x = x_pronotum+w_pronotum*0.2/2
-    y = y_pronotum
-    w = w_pronotum-w_pronotum*0.2
-    h = h_pronotum
-    #draw_pronotum(x, y, w, h)
+    pron = get_16_points(x_pron, y_pron, w_pron, h_pron)
 
+    elyt = get_16_points(x_elyt, y_elyt, w_elyt, h_elyt)
+    
+    l_wing = get_16_points(elyt[0][0], elyt[0][1], w_elyt/2, h_elyt)
+    
+    r_wing = get_16_points(elyt[2][0], elyt[2][1], w_elyt/2, h_elyt)
+    
+    ################################################################################
+    # Head
+    ################################################################################         
+    beginShape()
+    cvp(*head[2])
+    cvp(*head[8])
+    cvp(*head[10])
+    cvp(*head[12])
+    cvp(*head[2])
+    cvp(*head[8])
+    cvp(*head[10])
+    endShape()
+    
+    ################################################################################
+    # Elytron
+    ################################################################################         
+    beginShape()
+    cvp(*elyt[0])
+    cvp(*elyt[2])
+    cvp(*elyt[4])
+    cvp(*elyt[7])
+    cvp(*elyt[10])
+    cvp(*elyt[13])
+    cvp(*elyt[0])
+    cvp(*elyt[2])
+    cvp(*elyt[4])
+    endShape()
+    
+    # ################################################################################
+    # # Wing Coverings
+    # ################################################################################         
+    # # Left wing
+    # pushMatrix()
+    # #rotate(PI/4)
+    # beginShape()
+    # cvp(*elyt[0])
+    # cvp(*elyt[1])
+    # cvp(*elyt[2])
+    # cvp(*elyt[10])
+    # cvp(*elyt[13])
+    # cvp(*elyt[0])
+    # cvp(*elyt[1])
+    # cvp(*elyt[2])
+    # endShape()
+    # popMatrix()
+    
+    # # Right wing
+    # pushMatrix()
+    # #rotate(PI/4)
+    # beginShape()
+    # cvp(*elyt[2])
+    # cvp(*elyt[3])
+    # cvp(*elyt[4])
+    # cvp(*elyt[7])
+    # cvp(*elyt[10])
+    # cvp(*elyt[2])
+    # cvp(*elyt[3])
+    # cvp(*elyt[4])
+    # endShape()
+    # popMatrix()
+    
+    # ################################################################################
+    # # Pronotum
+    # ################################################################################         
+    # beginShape()
+    # cvp(*pron[0])
+    # cvp(*pron[2])
+    # cvp(*pron[4])
+    # cvp(*pron[7])
+    # cvp(*pron[10])
+    # cvp(*pron[13])
+    # cvp(*pron[0])
+    # cvp(*pron[2])
+    # cvp(*pron[4])
+    # endShape()
 
     # curveTightness(0)
     # y_n, x_e, y_s, x_w = elytron(0, 100, r=200)
@@ -138,115 +221,52 @@ def draw():
 
 ################################################################################
 # Functions
-################################################################################
+################################################################################         
+             
 
-def draw_head(x, y, w, h):
-    fill(0, 0, 30)
-    #rect(x, y, w, h)
-    beginShape()
-    cvp(x, y)
-    cvp(x+w, y)
-    cvp(x+w, y+h)
-    cvp(x, y+h)
-    cvp(x, y)
-    cvp(x+w, y)
-    cvp(x+w, y+h)
-    endShape()
-    
-def draw_pronotum(x, y, w, h):
-    y_squeeze = y*random(0.01, 0.17)
-    
-    fill(0, 0, 50)
-    #rect(x, y, w, h)
-    beginShape()
-    cvp(x, y)
-    cvp(x+w/2, y+y_squeeze)
-    cvp(x+w, y)
-    cvp(x+w, y+h)
-    cvp(x, y+h)
-    cvp(x, y)
-    cvp(x+w/2, y+y_squeeze)
-    cvp(x+w, y)
-    endShape()
-    
-def draw_elytron(x, y, w, h):
-    w_squeeze = w*random(0.01, 0.2)
-    y_squeeze = h*random(0.01, 0.4)
-    
-
-    
-    # Body
-    fill(0, 0, 70)
-    beginShape()
-    cvp(x*0.8, y)
-    cvp(x+w*0.5, y*1.3)
-    cvp(x*1.2+w, y)
-    cvp(x+w-w_squeeze*1.2, y+h-y_squeeze)
-    cvp(x+w/2, y+h*1.2)
-    cvp(x+w_squeeze*1.2, y+h-y_squeeze)
-    cvp(x*0.8, y)
-    cvp(x+w*0.5, y*1.3)
-    cvp(x*1.2+w, y)
-    endShape()
-    
-    # Left wing cover
-    fill(0, 0, 70)
-    #rect(x, y, w, h)
-    beginShape()
-    cvp(x, y)
-    cvp(x+w*0.25, y-50)
-    cvp(x+w*0.5, y)
-    curveTightness(0.4)
-    cvp(x+w*0.5, y+h+50)
-    curveTightness(0.9)
-    cvp(x+w_squeeze, y+h-y_squeeze)
-    curveTightness(0)
-    cvp(x, y)
-    cvp(x+w*0.25, y-50)
-    cvp(x+w*0.5, y)
-    endShape()
-    
-    # Right wing cover
-    fill(0, 0, 70)
-    #rect(x, y, w, h)
-    beginShape()
-    cvp(x+w*0.5, y)
-    curveTightness(0.9)
-    cvp(x+w*0.75, y-50)
-    curveTightness(0.4)
-    cvp(x+w, y)
-    curveTightness(0)
-    cvp(x+w-w_squeeze, y+h-y_squeeze)
-    cvp(x+w*0.5, y+h+50)
-    cvp(x+w*0.5, y)
-    curveTightness(0.9)
-    cvp(x+w*0.75, y-50)
-    curveTightness(0.4)
-    cvp(x+w, y)
-    curveTightness(0)
-    endShape()
-    
-    
-    #FIXME USE PUSH POP MATRIX FOR ONE LEG THEN ROTATE
-    
-    
-    # Shoulder
-    beginShape()
-    cvp(x+w*0.5, y+h*0.2)
-    cvp(x-w*0.2, y+h*0.2)
-    cvp(x-w*0.2, y+h*0.2)
-    endShape()
-    
-    line(x+w*0.5, y+h*0.8, x-w*0.2, y+h*0.8)
-
-def draw_upper_legs(x, y, w, h):
-    # based off of body shape/position, shoulder, arm w/fuzz, 4 point triangles, claws
-    pass
              
              
 def cvp(x, y):
     curveVertex(x, y)
     ellipse(x, y, 5, 5)
+    
+    
+def get_16_points(x, y, w, h):
+    points = [0]*16
+    points[0] = [x, y]
+    points[1] = [x+w*0.25, y]
+    points[2] = [x+w*0.5, y]
+    points[3] = [x+w*0.75, y]
+    points[4] = [x+w, y]
+    points[5] = [x+w, y+h*0.25]
+    points[6] = [x+w, y+h*0.5]
+    points[7] = [x+w, y+h*0.75]
+    points[8] = [x+w, y+h]
+    points[9] = [x+w*0.75, y+h]
+    points[10] = [x+w*0.5, y+h]
+    points[11] = [x+w*0.25, y+h]
+    points[12] = [x, y+h]
+    points[13] = [x, y+h*0.75]
+    points[14] = [x, y+h*0.5]
+    points[15] = [x, y+h*0.25]
+    return points
+    
+    
+def draw_16_points(points):
+    beginShape()
+    for p in points+points[0:3]:
+        cvp(*p)
+    endShape()
+    
+    
+def draw_12_points(points):
+    #points = [points[i] for i in [1, 2, 3, 5, 6, 7, 9, 10, 11, 13, 14, 15]]
+    curveTightness(0.3)
+    beginShape()
+    for p in points+points[0:3]:
+        cvp(*p)
+    endShape()
+    
 
 def mousePressed():
     helper.save_frame_timestamp('buggies', timestamp, random_seed)

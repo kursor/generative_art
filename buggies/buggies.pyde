@@ -15,7 +15,7 @@ import helper
 ################################################################################
 
 random_seed = int(random(0, 10000))
-# random_seed = 7596
+random_seed = 7598
 random_seed = helper.get_seed(random_seed)
 helper.set_seed(random_seed)
 
@@ -58,7 +58,7 @@ def setup():
     rectMode(CORNER)
     
     # Stops draw() from running in an infinite loop (should be last line)
-    #noLoop()  # Comment to run draw() infinitely (or until 'count' hits limit)
+    noLoop()  # Comment to run draw() infinitely (or until 'count' hits limit)
 
 
 ################################################################################
@@ -106,7 +106,6 @@ def draw():
     w_elytron = w_bug# * 0.9
     h_elytron = h_bug - h_head - h_pronotum
     
-    
     x = x_head+w_head*0.4/2
     y = y_head
     w = w_head-w_head*0.4
@@ -123,7 +122,7 @@ def draw():
     y = y_pronotum
     w = w_pronotum-w_pronotum*0.2
     h = h_pronotum
-    draw_pronotum(x, y, w, h)
+    #draw_pronotum(x, y, w, h)
 
 
     # curveTightness(0)
@@ -145,13 +144,13 @@ def draw_head(x, y, w, h):
     fill(0, 0, 30)
     #rect(x, y, w, h)
     beginShape()
-    cv_point(x, y)
-    cv_point(x+w, y)
-    cv_point(x+w, y+h)
-    cv_point(x, y+h)
-    cv_point(x, y)
-    cv_point(x+w, y)
-    cv_point(x+w, y+h)
+    cvp(x, y)
+    cvp(x+w, y)
+    cvp(x+w, y+h)
+    cvp(x, y+h)
+    cvp(x, y)
+    cvp(x+w, y)
+    cvp(x+w, y+h)
     endShape()
     
 def draw_pronotum(x, y, w, h):
@@ -160,62 +159,95 @@ def draw_pronotum(x, y, w, h):
     fill(0, 0, 50)
     #rect(x, y, w, h)
     beginShape()
-    cv_point(x, y)
-    cv_point(x+w/2, y+y_squeeze)
-    cv_point(x+w, y)
-    cv_point(x+w, y+h)
-    cv_point(x, y+h)
-    cv_point(x, y)
-    cv_point(x+w/2, y+y_squeeze)
-    cv_point(x+w, y)
+    cvp(x, y)
+    cvp(x+w/2, y+y_squeeze)
+    cvp(x+w, y)
+    cvp(x+w, y+h)
+    cvp(x, y+h)
+    cvp(x, y)
+    cvp(x+w/2, y+y_squeeze)
+    cvp(x+w, y)
     endShape()
     
 def draw_elytron(x, y, w, h):
     w_squeeze = w*random(0.01, 0.2)
     y_squeeze = h*random(0.01, 0.4)
     
+
+    
+    # Body
+    fill(0, 0, 70)
+    beginShape()
+    cvp(x*0.8, y)
+    cvp(x+w*0.5, y*1.3)
+    cvp(x*1.2+w, y)
+    cvp(x+w-w_squeeze*1.2, y+h-y_squeeze)
+    cvp(x+w/2, y+h*1.2)
+    cvp(x+w_squeeze*1.2, y+h-y_squeeze)
+    cvp(x*0.8, y)
+    cvp(x+w*0.5, y*1.3)
+    cvp(x*1.2+w, y)
+    endShape()
+    
+    # Left wing cover
     fill(0, 0, 70)
     #rect(x, y, w, h)
     beginShape()
-    cv_point(x, y)
-    cv_point(x+w, y)
-    cv_point(x+w-w_squeeze, y+h-y_squeeze)
-    cv_point(x+w/2, y+h+50)
-    cv_point(x+w_squeeze, y+h-y_squeeze)
-    cv_point(x, y)
-    cv_point(x+w, y)
-    cv_point(x+w-w_squeeze, y+h-y_squeeze)
+    cvp(x, y)
+    cvp(x+w*0.25, y-50)
+    cvp(x+w*0.5, y)
+    curveTightness(0.4)
+    cvp(x+w*0.5, y+h+50)
+    curveTightness(0.9)
+    cvp(x+w_squeeze, y+h-y_squeeze)
+    curveTightness(0)
+    cvp(x, y)
+    cvp(x+w*0.25, y-50)
+    cvp(x+w*0.5, y)
     endShape()
+    
+    # Right wing cover
+    fill(0, 0, 70)
+    #rect(x, y, w, h)
+    beginShape()
+    cvp(x+w*0.5, y)
+    curveTightness(0.9)
+    cvp(x+w*0.75, y-50)
+    curveTightness(0.4)
+    cvp(x+w, y)
+    curveTightness(0)
+    cvp(x+w-w_squeeze, y+h-y_squeeze)
+    cvp(x+w*0.5, y+h+50)
+    cvp(x+w*0.5, y)
+    curveTightness(0.9)
+    cvp(x+w*0.75, y-50)
+    curveTightness(0.4)
+    cvp(x+w, y)
+    curveTightness(0)
+    endShape()
+    
+    
+    #FIXME USE PUSH POP MATRIX FOR ONE LEG THEN ROTATE
+    
+    
+    # Shoulder
+    beginShape()
+    cvp(x+w*0.5, y+h*0.2)
+    cvp(x-w*0.2, y+h*0.2)
+    cvp(x-w*0.2, y+h*0.2)
+    endShape()
+    
+    line(x+w*0.5, y+h*0.8, x-w*0.2, y+h*0.8)
 
-def cv_point(x, y):
+def draw_upper_legs(x, y, w, h):
+    # based off of body shape/position, shoulder, arm w/fuzz, 4 point triangles, claws
+    pass
+             
+             
+def cvp(x, y):
     curveVertex(x, y)
-    #ellipse(x, y, 5, 5)
+    ellipse(x, y, 5, 5)
 
 def mousePressed():
     helper.save_frame_timestamp('buggies', timestamp, random_seed)
     
-def draw_concentric_wobble(stroke_weight, r_start, r_end, r_offset, offset_list, angles_list, x_center, y_center):
-    strokeWeight(stroke_weight)
-        
-    for r in range(r_start, r_end, 3*stroke_weight):
-        offset = [r_offset*r*x for x in offset_list]
-        #offset = [x for x in offset_list]
-        
-        beginShape()
-        x_0, y_0 = helper.circle_points(x_center, y_center, r, angles_list[0])
-        curveVertex(x_0 + offset[0], y_0 + offset[0])
-        x_1, y_1 = helper.circle_points(x_center, y_center, r, angles_list[1])
-        curveVertex(x_1 + offset[1], y_1 + offset[2])
-        x_2, y_2 = helper.circle_points(x_center, y_center, r, angles_list[2])
-        curveVertex(x_2 + offset[2], y_2 + offset[2])
-        
-        for idx,a in enumerate(angles_list[3:-1]):
-            # radius = random_centered(radius, 30) # Randomize the radius a bit for each point
-            x, y = helper.circle_points(x_center, y_center, r, a)
-            curveVertex(x + offset[2+idx], y + offset[2+idx])
-    
-        # Run the curve through the starting three points to ensure smooth connection at the end
-        curveVertex(x_0 + offset[0], y_0 + offset[0])
-        curveVertex(x_1 + offset[1], y_1 + offset[2])
-        curveVertex(x_2 + offset[2], y_2 + offset[2])
-        endShape()

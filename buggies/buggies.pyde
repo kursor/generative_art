@@ -111,14 +111,14 @@ def draw():
 
     # Pronotum
     w_pron_offset = 0.9
-    g_pron = 10  # gap
+    g_pron = random(0, 15)  # gap
     x_pron = x_0+w_bug*(1-w_pron_offset)/2
     y_pron = y_head + h_head + g_pron
     w_pron = w_bug*w_pron_offset
     h_pron = random(0, h_bug * 0.3)
 
     # Elytron
-    g_elyt = 10
+    g_elyt = random(0, 15)
     x_elyt = x_0
     y_elyt = y_pron + h_pron + g_elyt
     w_elyt = w_bug
@@ -126,6 +126,8 @@ def draw():
 
     w_eyes = 50
     h_eyes = 50
+    
+
     
     fill(0, 0, 50)
     head = get_16_points(x_head, y_head, w_head, h_head)
@@ -135,7 +137,6 @@ def draw():
     r_wing = get_16_points(elyt[2][0], elyt[2][1], w_elyt / 2, h_elyt)
     l_eye = get_16_points(head[1][0]-w_eyes/2, head[1][1], h_eyes, w_eyes)
     r_eye = get_16_points(head[3][0]-w_eyes/2, head[3][1], h_eyes, w_eyes)
-    
 
     
     ##########################################################################
@@ -158,6 +159,30 @@ def draw():
     pushStyle()
     curveTightness(0.9)
     
+    m = createGraphics(width, height)
+    m.beginDraw()
+    m.pushMatrix()
+    m.translate(width/2, height/2)
+    m.beginShape()
+    m.curveTightness(0.9)
+    m.curveVertex(head[12][0]+w_head*0.05, head[11][1]-g_pron*2)
+    m.curveVertex(head[8][0]-w_head*0.05, head[9][1]-g_pron*2)
+    m.curveVertex(head[8][0]+w_head*0.2, head[9][1]+g_pron*2)
+    m.curveVertex(head[12][0]-w_head*0.2, head[11][1]+g_pron*2)
+    m.curveVertex(head[12][0]+w_head*0.05, head[11][1]-g_pron*2)
+    m.curveVertex(head[8][0]-w_head*0.05, head[9][1]-g_pron*2)
+    m.curveVertex(head[8][0]+w_head*0.2, head[9][1]+g_pron*2)
+    m.endShape()
+    m.endDraw()
+    m.popMatrix()
+    
+    pattern = get_pattern('dots', 0.3)
+    pattern.mask(m)
+    image(pattern, -width/2, -height/2)
+    
+    pushStyle()
+    noFill()
+    stroke(0, 0, 20)
     beginShape()
     cvp(head[12][0]+w_head*0.1, head[11][1]-g_pron)
     cvp(head[8][0]-w_head*0.1, head[9][1]-g_pron)
@@ -167,7 +192,6 @@ def draw():
     cvp(head[8][0]-w_head*0.1, head[9][1]-g_pron)
     cvp(head[8][0]+w_head*0.2, head[9][1]+g_pron*2)
     endShape()
-    
     popStyle()
     
     ##########################################################################
@@ -202,6 +226,7 @@ def draw():
     endShape()
     
     popStyle()
+    curveTightness(0)
 
 
     ##########################################################################
@@ -210,6 +235,29 @@ def draw():
     # Pokey head or a round head
     pointed = True
     
+    m = createGraphics(width, height)
+    m.beginDraw()
+    m.pushMatrix()
+    m.translate(width/2, height/2)
+    m.beginShape()
+    m.curveVertex(*head[2])
+    m.curveVertex(*head[7]) if pointed else m.curveVertex(*head[6])
+    m.curveVertex(*head[10])
+    m.curveVertex(*head[13]) if pointed else m.curveVertex(*head[14])
+    m.curveVertex(*head[2])
+    m.curveVertex(*head[7]) if pointed else m.curveVertex(*head[6])
+    m.curveVertex(*head[10])
+    m.endShape()
+    m.endDraw()
+    m.popMatrix()
+    
+    pattern = get_pattern('dots', 0.5)
+    pattern.mask(m)
+    image(pattern, -width/2, -height/2)
+    
+    pushStyle()
+    noFill()
+    stroke(0, 0, 20)
     beginShape()
     cvp(*head[2])
     cvp(*head[7]) if pointed else cvp(*head[6])
@@ -219,20 +267,80 @@ def draw():
     cvp(*head[7]) if pointed else cvp(*head[6])
     cvp(*head[10])
     endShape()
-
+    popStyle()
+    
+    
     ##########################################################################
-    # Elytron
+    # Legs
     ##########################################################################
-    #under = [elyt[2][0], elyt[2][1] - h_elyt*0.1]
     wing_x_squeeze = 50
     
     elyt[7][0] -= wing_x_squeeze*1.1
     elyt[13][0] += wing_x_squeeze*1.1
+    elyt[14][0] += wing_x_squeeze
     
-    elyt[0] = pron[12]
-    elyt[2] = pron[10]
-    elyt[4] = pron[8]
+    elyt[0] = [pron[12][0], pron[12][1]-h_pron*0.1]
+    elyt[2] = [pron[10][0], pron[10][1]-h_pron*0.1]
+    elyt[4] = [pron[8][0], pron[8][1]-h_pron*0.1]
+    
+    arm_length_a = w_elyt*random(0.01, 0.1)
+    arm_length_b = h_elyt*random(0.2, 0.4)
+    arm_length_c = h_elyt*random(0.2, 0.5)
+    arm_length_d = 50
+    arm_width_a = 20
+    arm_width_b = 20
+    arm_width_c = 20
+    arm_width_d = 20
+    
+    up_angle_a = random(200, 260)
+    up_angle_b = random(210, 270)
+    up_angle_c = random(215, 270)
+    dn_angle_a = random(145, 185)
+    dn_angle_b = random(85, 125)
+    dn_angle_c = random(75, 115)
+    
+    
+    
+    draw_leg(pron[14][0], pron[14][1], arm_length_a, up_angle_a, 50, arm_length_b, up_angle_b, 5, arm_length_c, up_angle_c, 5)
+    draw_leg(elyt[15][0], elyt[15][1], arm_length_a, dn_angle_a, 50, arm_length_b, dn_angle_b, 5, arm_length_c, dn_angle_c, 5, True)
+    draw_leg(elyt[14][0], elyt[14][1], arm_length_a, dn_angle_a, 50, arm_length_b, dn_angle_b, 5, arm_length_c, dn_angle_c, 5, True)
+    pushMatrix()
+    scale(-1.0, 1.0)  
+    draw_leg(pron[14][0], pron[14][1], arm_length_a, up_angle_a, 50, arm_length_b, up_angle_b, 5, arm_length_c, up_angle_c, 5)
+    draw_leg(elyt[15][0], elyt[15][1], arm_length_a, dn_angle_a, 50, arm_length_b, dn_angle_b, 5, arm_length_c, dn_angle_c, 5, True)
+    draw_leg(elyt[14][0], elyt[14][1], arm_length_a, dn_angle_a, 50, arm_length_b, dn_angle_b, 5, arm_length_c, dn_angle_c, 5, True)
+    popMatrix()
+    
+    
+    ##########################################################################
+    # Elytron
+    ##########################################################################
+    m = createGraphics(width, height)
+    m.beginDraw()
+    m.pushMatrix()
+    m.translate(width/2, height/2)
+    m.beginShape()
+    m.curveVertex(*elyt[0])
+    m.curveVertex(*elyt[2])
+    m.curveVertex(*elyt[4])
+    m.curveVertex(*elyt[7])
+    m.curveVertex(*elyt[10])
+    m.curveVertex(*elyt[13])
+    m.curveVertex(*elyt[0])
+    m.curveVertex(*elyt[2])
+    m.curveVertex(*elyt[4])
+    m.endShape()
+    m.endDraw()
+    m.popMatrix()
 
+    pattern = get_pattern('dots', 0.3)
+    pattern.mask(m)
+    image(pattern, -width/2, -height/2)
+    
+
+    pushStyle()
+    noFill()
+    stroke(0, 0, 20)
     beginShape()
     cvp(*elyt[0])
     cvp(*elyt[2])
@@ -244,6 +352,7 @@ def draw():
     cvp(*elyt[2])
     cvp(*elyt[4])
     endShape()
+    popStyle()
 
     ##########################################################################
     # Pronotum
@@ -251,6 +360,39 @@ def draw():
     pron[0][0] += w_pron*0.1
     pron[4][0] -= w_pron*0.1
 
+        
+    m = createGraphics(width, height)
+    m.beginDraw()
+    m.pushMatrix()
+    m.translate(width/2, height/2)
+    m.beginShape()
+    m.curveVertex(*pron[0])
+    m.curveTightness(0.7)
+    m.curveVertex(*pron[2])
+    m.curveTightness(0)
+    m.curveVertex(*pron[4])
+    m.curveVertex(*pron[7])
+    m.curveTightness(0.7)
+    m.curveVertex(*pron[10])
+    m.curveTightness(0)
+    m.curveVertex(*pron[13])
+    m.curveVertex(*pron[0])
+    m.curveTightness(0.7)
+    m.curveVertex(*pron[2])
+    m.curveTightness(0)
+    m.curveVertex(*pron[4])
+    m.endShape()
+    m.endDraw()
+    m.popMatrix()
+
+    pattern = get_pattern('dots', 0.5)
+    pattern.mask(m)
+    image(pattern, -width/2, -height/2)
+    
+    # Outline
+    pushStyle()
+    noFill()
+    stroke(0, 0, 20)
     beginShape()
     cvp(*pron[0])
     curveTightness(0.7)
@@ -268,7 +410,8 @@ def draw():
     curveTightness(0)
     cvp(*pron[4])
     endShape()
-
+    popStyle()
+    
     ##########################################################################
     # Wing Coverings
     ##########################################################################
@@ -278,78 +421,28 @@ def draw():
     r_wing[7][0] -= wing_x_squeeze
     l_wing[13][0] += wing_x_squeeze
 
-    # Left wing
-    pushMatrix()
-    # rotate(PI/40)
-    beginShape()
-    cvp(*l_wing[0])
-    cvp(*l_wing[3])
-    cvp(*l_wing[5])
-    cvp(*l_wing[8])
-    curveTightness(0.9)
-    cvp(*l_wing[13])
-    curveTightness(0)
-    cvp(*l_wing[0])
-    cvp(*l_wing[3])
-    cvp(*l_wing[5])
-    endShape()
-    popMatrix()
 
-    # Right wing
-    pushMatrix()
-    # rotate(-PI/40)
-    beginShape()
-    cvp(*r_wing[15])
-    curveTightness(0.9)
-    cvp(*r_wing[1])
-    curveTightness(0)
-    cvp(*r_wing[4])
-    cvp(*r_wing[7])
-    cvp(*r_wing[12])
-    cvp(*r_wing[15])
-    curveTightness(0.9)
-    cvp(*r_wing[1])
-    curveTightness(0)
-    cvp(*r_wing[4])
-    endShape()
-    popMatrix()
+
+#     # Right wing
+#     pushMatrix()
+#     # rotate(-PI/40)
+#     beginShape()
+#     cvp(*r_wing[15])
+#     curveTightness(0.9)
+#     cvp(*r_wing[1])
+#     curveTightness(0)
+#     cvp(*r_wing[4])
+#     cvp(*r_wing[7])
+#     cvp(*r_wing[12])
+#     cvp(*r_wing[15])
+#     curveTightness(0.9)
+#     cvp(*r_wing[1])
+#     curveTightness(0)
+#     cvp(*r_wing[4])
+#     endShape()
+#     popMatrix()
     
-    pattern_style = 'dots'
-    # Wing Pattern
-    if pattern_style == 'dots':
-        pattern = createGraphics(width, height)
-        pattern.beginDraw()
-        pattern.pushMatrix()
-        pattern.background(color(0, 13, 74)) # mauve
-        #pattern.translate(width/2, height/2)
-        pattern.noStroke()
-        pattern.fill(color(150, 22, 56)) # green
-        for i in range(40):
-            r = random(5, 80)
-            x = random(0, width)
-            y = random(0, height)
-            print(x, y, r)
-            pattern.ellipse(x, y, r, r)
-        pattern.endDraw()
-        pattern.popMatrix
-        
-    elif pattern_style == 'gradient':
-        pattern = createGraphics(width, height)
-        pattern.beginDraw()
-        pattern.pushMatrix()
-        pattern.background(color(0, 100, 100)) # mauve
-        #pattern.translate(width/2, height/2)
-        pattern.noStroke()
-        for i in range(40):
-            pattern.fill(color(random(0, 360), random(20,30), random(60,90), 50)) # green
-            r = random(200, 1000)
-            x = random(0, width)
-            y = random(0, height)
-            print(x, y, r)
-            pattern.ellipse(x, y, r, r)
-        pattern.endDraw()
-        pattern.popMatrix
-        
+    pattern = get_pattern('dots')
         
     # Left wing (to be mirrored)
     m = createGraphics(width, height)
@@ -359,15 +452,15 @@ def draw():
     m.translate(width/2, height/2)
     m.beginShape()
     m.curveVertex(*l_wing[0])
-    m.curveVertex(*l_wing[3])
-    m.curveVertex(*l_wing[5])
+    m.curveVertex(*l_wing[2])
+    m.curveVertex(l_wing[5][0], l_wing[5][1]-h*0.05)
     m.curveVertex(*l_wing[8])
     m.curveTightness(0.9)
     m.curveVertex(*l_wing[13])
     m.curveTightness(0)
     m.curveVertex(*l_wing[0])
-    m.curveVertex(*l_wing[3])
-    m.curveVertex(*l_wing[5])
+    m.curveVertex(*l_wing[2])
+    m.curveVertex(l_wing[5][0], l_wing[5][1]-h*0.05)
     m.endShape()
     m.endDraw()
     m.popMatrix()
@@ -376,35 +469,15 @@ def draw():
     pattern.mask(m)
     pushMatrix()
     image(pattern, -width/2, -height/2)
+    outline_wing(l_wing)
     # Mirror the wing
     scale(-1.0, 1.0)
     image(pattern, -width/2, -height/2)
+    outline_wing(l_wing)
     popMatrix()
-    
-    
-    ##########################################################################
-    # Legs
-    ##########################################################################
-    # arm_length_a = 100
-    # arm_length_b = 200
-    # arm_length_c = 200
-    # arm_length_d = 50
-    # arm_width_a = 20
-    # arm_width_b = 20
-    # arm_width_a = 20
-    # arm_width_a = 20
-    
-    # beginShape()
-    # cvp(*l_wing[15])
-    # cvp(l_wing[15][0], l_wing[15][1]-)
-    # endShape()
-    
-    # draw_16_points(l_dn_legs)
-    
-    # draw_16_points(r_up_legs)
-    # draw_16_points(r_dn_legs)
-    
-    
+
+
+
 
     helper.save_frame_timestamp('buggies', timestamp, random_seed)
 
@@ -417,6 +490,141 @@ def draw():
 # Functions
 ##########################################################################
 
+def draw_leg(x, y, length_a=100, angle_a=165, span_a=50, length_b=200, angle_b=105, span_b=5, length_c=200, angle_c=95, span_c=5, upper_leg=False):
+    # Arm A
+    angle = angle_a
+    span = span_a
+    x = x+5
+    y = y
+    ax1, ay1 = helper.circle_points(x+20, y, -10, radians(angle+span+180))
+    ax2, ay2 = helper.circle_points(x+20, y, -10, radians(angle+180))
+    ax3, ay3 = helper.circle_points(x+20, y, -10, radians(angle-span+180))
+    ax4, ay4 = helper.circle_points(x, y, length_a, radians(angle-span))
+    ax5, ay5 = helper.circle_points(x, y, length_a, radians(angle))
+    ax6, ay6 = helper.circle_points(x, y, length_a, radians(angle+span))
+    
+    # Arm B
+    angle = angle_b
+    span = span_b
+    x = ax4
+    y = ay4
+    bx1, by1 = helper.circle_points(x-span, y, 0, radians(angle+span+180))
+    bx2, by2 = helper.circle_points(x, y, 0, radians(angle+180))
+    bx3, by3 = helper.circle_points(x+span, y, 0, radians(angle-span+180))
+    bx4, by4 = helper.circle_points(x, y, length_b, radians(angle-span))
+    bx5, by5 = helper.circle_points(x, y, length_b, radians(angle))
+    bx6, by6 = helper.circle_points(x, y, length_b, radians(angle+span))
+    
+    # Arm C
+    angle = angle_c
+    span = span_c
+    x = bx5
+    y = by5
+    cx1, cy1 = helper.circle_points(x-span, y, 0, radians(angle+span+180))
+    cx2, cy2 = helper.circle_points(x, y, 0, radians(angle+180))
+    cx3, cy3 = helper.circle_points(x+span, y, 0, radians(angle-span+180))
+    cx4, cy4 = helper.circle_points(x, y, length_c, radians(angle-span))
+    cx5, cy5 = helper.circle_points(x, y, length_c, radians(angle))
+    cx6, cy6 = helper.circle_points(x, y, length_c, radians(angle+span))
+    
+    beginShape()
+    cvp(cx1, cy1) if upper_leg else  cvp(cx3, cy3)
+    cvp(cx2, cy2)
+    cvp(cx3, cy3) if upper_leg else  cvp(cx1, cy1)
+    cvp(cx4, cy4)
+    cvp(cx5, cy5)
+    cvp(cx6, cy6)
+    cvp(cx1, cy1) if upper_leg else  cvp(cx3, cy3)
+    cvp(cx2, cy2)
+    cvp(cx3, cy3) if upper_leg else  cvp(cx1, cy1)
+    endShape()
+    
+    beginShape()
+    cvp(bx1, by1) if upper_leg else  cvp(bx3, by3)
+    cvp(bx2, by2)
+    cvp(bx3, by3) if upper_leg else  cvp(bx1, by1)
+    cvp(bx4, by4)
+    cvp(bx5, by5)
+    cvp(bx6, by6)
+    cvp(bx1, by1) if upper_leg else  cvp(bx3, by3)
+    cvp(bx2, by2)
+    cvp(bx3, by3) if upper_leg else  cvp(bx1, by1)
+    endShape()
+    
+    beginShape()
+    cvp(ax1, ay1)
+    cvp(ax2, ay2)
+    cvp(ax3, ay3)
+    cvp(ax4, ay4)
+    cvp(ax5, ay5)
+    cvp(ax6, ay6)
+    cvp(ax1, ay1)
+    cvp(ax2, ay2)
+    cvp(ax3, ay3)
+    endShape()
+
+
+def get_pattern(pattern_style, lightness_offset=1):
+
+    if pattern_style == 'dots':
+        pattern = createGraphics(width, height)
+        pattern.beginDraw()
+        pattern.pushMatrix()
+        pattern.background(color(0, 13, 74*lightness_offset)) # mauve
+        #pattern.translate(width/2, height/2)
+        pattern.noStroke()
+        pattern.fill(color(150, 22, 56*lightness_offset)) # green
+        for i in range(40):
+            r = random(5, 80)
+            x = random(0, width)
+            y = random(0, height)
+            print(x, y, r)
+            pattern.ellipse(x, y, r, r*random(1.2, 3))
+        pattern.endDraw()
+        pattern.popMatrix
+        
+    elif pattern_style == 'gradient':
+        pattern = createGraphics(width, height)
+        pattern.beginDraw()
+        pattern.pushMatrix()
+        pattern.background(color(0, 100, 100*lightness_offset)) # mauve
+        #pattern.translate(width/2, height/2)
+        pattern.noStroke()
+        for i in range(40):
+            pattern.fill(color(random(0, 360), random(20,30), random(60,90), 50*lightness_offset)) # green
+            r = random(200, 1000)
+            x = random(0, width)
+            y = random(0, height)
+            print(x, y, r)
+            pattern.ellipse(x, y, r, r)
+        pattern.endDraw()
+        pattern.popMatrix
+        
+    return pattern
+
+
+def outline_wing(l_wing):
+    pushStyle()
+    noFill()
+    stroke(0, 0, 20)
+    
+    pushMatrix()
+    # rotate(PI/40)
+    beginShape()
+    cvp(*l_wing[0])
+    cvp(*l_wing[2])
+    cvp(l_wing[5][0], l_wing[5][1]-h*0.05)
+    cvp(*l_wing[8])
+    curveTightness(0.9)
+    cvp(*l_wing[13])
+    curveTightness(0)
+    cvp(*l_wing[0])
+    cvp(*l_wing[2])
+    cvp(l_wing[5][0], l_wing[5][1]-h*0.05)
+    endShape()
+    popMatrix()
+    popStyle()
+    
 
 def cvp(x, y):
     curveVertex(x, y)
